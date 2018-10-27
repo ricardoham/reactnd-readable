@@ -1,11 +1,22 @@
 import axios from 'axios';
 import { FETCH_POSTS_SUCCESS, FETCH_POSTS_FAILURE } from './actions-types';
 
-const ROOT_URL = 'http://localhost:3001/';
+const ROOT_URL = 'http://localhost:3001';
 
-export function fetchPosts() {
+export default function fetchPosts() {
   const url = `${ROOT_URL}/posts`;
   return dispatch => (
-    axios.get()
+    axios.get(url, {
+      headers: {
+        Authorization: 'whatever-you-want',
+      },
+    }).then(response => dispatch({
+      type: FETCH_POSTS_SUCCESS,
+      payload: response.data,
+    }))
+      .catch(response => dispatch({
+        type: FETCH_POSTS_FAILURE,
+        error: response.error,
+      }))
   );
 }
