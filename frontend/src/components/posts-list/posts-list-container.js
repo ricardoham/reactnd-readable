@@ -11,6 +11,7 @@ class PostsListContainer extends Component {
 
   render() {
     const { posts, loading } = this.props;
+    console.log('posts', posts);
     if (loading) {
       return (
         <div>Loading...</div>
