@@ -1,7 +1,6 @@
 import React from 'react';
 
 class PostsCategories extends React.PureComponent {
-
   renderCategories = () => {
     const { categories } = this.props;
     console.log('Dentro', categories);

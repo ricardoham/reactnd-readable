@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_POSTS_SUCCESS, FETCH_POSTS_FAILURE } from './actions-types';
+import { FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE } from './actions-types';
 
 const ROOT_URL = 'http://localhost:3001';
 
@@ -11,11 +11,11 @@ export default function fetchPosts() {
         Authorization: 'whatever-you-want',
       },
     }).then(response => dispatch({
-      type: FETCH_POSTS_SUCCESS,
+      type: FETCH_ALL_POSTS_SUCCESS,
       payload: response.data,
     }))
       .catch(response => dispatch({
-        type: FETCH_POSTS_FAILURE,
+        type: FETCH_ALL_POSTS_FAILURE,
         error: response.error,
       }))
   );

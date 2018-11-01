@@ -1,11 +1,14 @@
 import React from 'react';
 // import PostsListContainer from './posts-list/posts-list-container';
-import PostsCategoriesContainer from './posts-categories/posts-categories-container';
+import PostsDetailsContainer from './posts-list/posts-details/posts-details-container';
+// import PostsCategoriesContainer from './posts-categories/posts-categories-container';
+
 
 const App = () => (
   <div>
     {/* <PostsListContainer /> */}
-    <PostsCategoriesContainer />
+    <PostsDetailsContainer />
+    {/* <PostsCategoriesContainer /> */}
   </div>
 );
 
