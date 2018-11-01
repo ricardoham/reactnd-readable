@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import fetchPosts from '../../actions/action-posts';
+import { fetchAllPosts } from '../../actions/action-posts';
 import PostsList from './posts-list';
 
 class PostsListContainer extends Component {
   componentDidMount() {
-    this.props.actions.fetchPosts(); /*eslint-disable-line*/
+    this.props.actions.fetchAllPosts(); /*eslint-disable-line*/
   }
 
   render() {
@@ -29,7 +29,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchPosts }, dispatch),
+  actions: bindActionCreators({ fetchAllPosts }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);

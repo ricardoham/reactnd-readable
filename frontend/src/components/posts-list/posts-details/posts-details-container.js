@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import fetchPost from '../../../actions/action-post';
+import { fetchPost } from '../../../actions/action-posts';
 import PostsDetails from './posts-details';
 
 const id = '8xf0y6ziyjabvozdd253nd';
@@ -24,8 +24,8 @@ const mapStateToProps = state => ({
   loading: state.loading,
 });
 
-const mapDispathToProps = dispath => ({
-  actions: bindActionCreators({ fetchPost }, dispath),
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ fetchPost }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispathToProps)(PostsDetailsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsDetailsContainer);
