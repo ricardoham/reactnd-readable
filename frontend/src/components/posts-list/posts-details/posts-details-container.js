@@ -7,7 +7,7 @@ import PostsDetails from './posts-details';
 const id = '8xf0y6ziyjabvozdd253nd';
 class PostsDetailsContainer extends Component {
   componentDidMount() {
-    this.props.actions.fetchPost(id);
+    this.props.actions.fetchPost(id); /*eslint-disable-line*/
   }
 
   render() {
