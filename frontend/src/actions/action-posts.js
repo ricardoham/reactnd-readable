@@ -2,18 +2,15 @@ import axios from 'axios';
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE,
   FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
-  ADD_POST_SUCCESS, ADD_POST_FAILURE,
+  ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST,
 } from './actions-types';
+import { ROOT_URL, headers } from '../utils/constants';
 
-const ROOT_URL = 'http://localhost:3001';
+axios.defaults.headers.common['Authorization'] = headers;
 
 export function fetchAllPosts() {
   return dispatch => (
-    axios.get(`${ROOT_URL}/posts`, {
-      headers: {
-        Authorization: 'whatever-you-want',
-      },
-    }).then(response => dispatch({
+    axios.get(`${ROOT_URL}/posts`).then(response => dispatch({
       type: FETCH_ALL_POSTS_SUCCESS,
       payload: response.data,
     }))
@@ -26,9 +23,7 @@ export function fetchAllPosts() {
 
 export function fetchPost(id) {
   return dispatch => (
-    axios.get(`${ROOT_URL}/posts/${id}`, {
-      headers: { Authorization: 'whatever-you-want' },
-    }).then(response => dispatch({
+    axios.get(`${ROOT_URL}/posts/${id}`).then(response => dispatch({
       type: FETCH_POST_SUCCESS,
       payload: response.data,
     }))
@@ -42,7 +37,6 @@ export function fetchPost(id) {
 export function addPost(id, timestamp, title, body, author, category) {
   return dispatch => (
     axios.post(`${ROOT_URL}/posts`, {
-      headers: { Authorization: 'whatever-you-want' },
       params: {
         id,
         timestamp,
@@ -58,5 +52,15 @@ export function addPost(id, timestamp, title, body, author, category) {
         type: ADD_POST_FAILURE,
         error: response.error,
       }))
+  );
+}
+
+export function deletePost(id, callback) {
+  return dispatch => (
+    axios.delete(`${ROOT_URL}/posts/${id}`).then(() => dispatch({
+      type: DELETE_POST,
+      payload: id,
+      callback,
+    }))
   );
 }

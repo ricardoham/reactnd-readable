@@ -1,21 +1,35 @@
 import axios from 'axios';
-import { FETCH_CATEGORIES_SUCCESS, FETCH_CATEGORIES_FAILURE } from './actions-types';
+import {
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_FAILURE,
+  FETCH_POST_CATEGORY_SUCCESS,
+  FETCH_POST_CATEGORY_FAILURE,
+} from './actions-types';
+import { ROOT_URL, headers } from '../utils/constants';
 
-const ROOT_URL = 'http://localhost:3001';
+axios.defaults.headers.common['Authorization'] = headers;
 
 export default function fetchCategories() {
-  const url = `${ROOT_URL}/categories`;
   return dispatch => (
-    axios.get(url, {
-      headers: {
-        Authorization: 'whatever-you-want',
-      },
-    }).then(response => dispatch({
+    axios.get(`${ROOT_URL}/categories`).then(response => dispatch({
       type: FETCH_CATEGORIES_SUCCESS,
       payload: response.data,
     }))
       .catch(response => dispatch({
         type: FETCH_CATEGORIES_FAILURE,
+        error: response.error,
+      }))
+  );
+}
+
+export function fetchPostCategory(category) {
+  return dispatch => (
+    axios.get(`${ROOT_URL}/${category}/posts`).then(response => dispatch({
+      type: FETCH_POST_CATEGORY_SUCCESS,
+      payload: response.data,
+    }))
+      .catch(response => dispatch({
+        type: FETCH_POST_CATEGORY_FAILURE,
         error: response.error,
       }))
   );

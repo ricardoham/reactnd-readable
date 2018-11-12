@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
+import { Formik, withFormik } from 'formik';
 import * as Yup from 'yup';
+import { addPost } from '../../../actions/action-posts';
 
 class PostNew extends React.PureComponent {
 
@@ -29,7 +30,7 @@ class PostNew extends React.PureComponent {
                 type="title"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // value={values.title}
+                value={values.title}
               />
             </label>
             <label htmlFor="author">
@@ -63,8 +64,16 @@ class PostNew extends React.PureComponent {
   }
 }
 
-export default formikValidations({
-  mapPropsToValues
-})
 
-// export default PostNew;
+export default function enhanceForm() {
+  const { submitPost } = this.props;
+
+  return ({
+    handleSubmit: (values, { submitPost(values) }) =>
+
+  });
+}
+
+// export default enhanceForm({
+//   handleSubmit: (values, { this.props.submitPost() })
+// })
