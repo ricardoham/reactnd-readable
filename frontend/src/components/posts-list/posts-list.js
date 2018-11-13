@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 class PostsList extends React.PureComponent {
   renderPosts = () => {
@@ -14,7 +15,10 @@ class PostsList extends React.PureComponent {
 
   render() {
     return (
-      <div>{this.renderPosts()}</div>
+      <div>
+        {this.renderPosts()}
+        <Link to="/post">Details</Link>
+      </div>
     );
   }
 }
