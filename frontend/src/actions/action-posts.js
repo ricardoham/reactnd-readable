@@ -1,8 +1,9 @@
 import axios from 'axios';
+import uuidv4 from 'uuid/v4';
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE,
   FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
-  ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST,
+  ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
 } from './actions-types';
 import { ROOT_URL, headers } from '../utils/constants';
 
@@ -16,7 +17,7 @@ export function fetchAllPosts() {
     }))
       .catch(response => dispatch({
         type: FETCH_ALL_POSTS_FAILURE,
-        error: response.error,
+        error: response.status,
       }))
   );
 }
@@ -29,28 +30,34 @@ export function fetchPost(id) {
     }))
       .catch(response => dispatch({
         type: FETCH_POST_FAILURE,
-        error: response.error,
+        error: response.status,
       }))
   );
 }
 
-export function addPost(id, timestamp, title, body, author, category) {
+export function addPost(values) {
+  const newValues = { ...values, id: uuidv4(), timestamp: Date.now() };
   return dispatch => (
-    axios.post(`${ROOT_URL}/posts`, {
-      params: {
-        id,
-        timestamp,
-        title,
-        body,
-        author,
-        category,
-      },
-    }).then(() => dispatch({
+    axios.post(`${ROOT_URL}/posts`, newValues).then(response => dispatch({
       type: ADD_POST_SUCCESS,
+      payload: response,
     }))
       .catch(response => dispatch({
         type: ADD_POST_FAILURE,
-        error: response.error,
+        error: response.status,
+      }))
+  );
+}
+
+export function editPost(id, values) {
+  return dispatch => (
+    axios.put(`${ROOT_URL}/posts/${id}`, values).then(response => dispatch({
+      type: EDIT_POST_SUCCESS,
+      payload: response.data,
+    }))
+      .catch(response => dispatch({
+        type: EDIT_POST_FAILURE,
+        error: response.status,
       }))
   );
 }

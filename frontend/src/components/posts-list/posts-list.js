@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 class PostsList extends React.PureComponent {
   renderPosts = () => {
     const { posts } = this.props;
     return posts.map(post => (
-      <div key={post.id}>
-        <span>Title: {post.title}</span>
-        <span>Author: {post.author}</span>
-        <span>Comment Count: {post.commentCount}</span>
-      </div>
+      <li>
+        <Link to={`/${post.category}/${post.id}`}>
+          {post.title}
+        </Link>
+      </li>
     ));
   }
 
@@ -17,7 +17,7 @@ class PostsList extends React.PureComponent {
     return (
       <div>
         {this.renderPosts()}
-        <Link to="/post">Details</Link>
+        <Link to="/post-new">Add Post</Link>
       </div>
     );
   }

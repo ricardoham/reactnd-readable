@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import { fetchPost } from '../../../actions/action-posts';
 import PostsDetails from './posts-details';
 
-const id = '8xf0y6ziyjabvozdd253nd';
 class PostsDetailsContainer extends Component {
   componentDidMount() {
+    const { id } = this.props.match.params;
     this.props.actions.fetchPost(id); /*eslint-disable-line*/
   }
 
@@ -14,7 +14,7 @@ class PostsDetailsContainer extends Component {
     const { post } = this.props;
     console.log('===>MY post', post);
     return (
-      <PostsDetails />
+      <PostsDetails post={post} />
     );
   }
 }
