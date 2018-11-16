@@ -9,7 +9,7 @@ import { ROOT_URL, headers } from '../utils/constants';
 
 axios.defaults.headers.common['Authorization'] = headers;
 
-export default function fetchCategories() {
+export function fetchCategories() {
   return dispatch => (
     axios.get(`${ROOT_URL}/categories`).then(response => dispatch({
       type: FETCH_CATEGORIES_SUCCESS,
