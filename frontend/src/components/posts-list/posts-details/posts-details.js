@@ -30,7 +30,7 @@ class PostsDetails extends React.PureComponent {
         {this.renderPostDetail()}
         <Link to={`/${post.category}/post-edit/${post.id}`}>Edit Post</Link>
         <Link to="/">Back</Link>
-        <button type="button" onClick={this.removePost()}>Remove Post</button>
+        {/* <button type="button" onClick={this.removePost()}>Remove Post</button> */}
       </div>
     );
   }

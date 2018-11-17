@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 class PostEdit extends React.PureComponent {
 
   sendPost = (values) => {
-    const { editPost } = this.props;
+    const { post, editPost } = this.props;
     console.log('FOI');
     console.log('MY valeus', values);
-    editPost(values);
+    editPost(post.id, values);
   }
 
   render() {

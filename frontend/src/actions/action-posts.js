@@ -53,7 +53,7 @@ export function editPost(id, values) {
   return dispatch => (
     axios.put(`${ROOT_URL}/posts/${id}`, values).then(response => dispatch({
       type: EDIT_POST_SUCCESS,
-      payload: response.data,
+      payload: response,
     }))
       .catch(response => dispatch({
         type: EDIT_POST_FAILURE,
