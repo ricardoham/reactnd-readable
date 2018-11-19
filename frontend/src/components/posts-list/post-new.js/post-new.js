@@ -6,19 +6,22 @@ import * as Yup from 'yup';
 
 class PostNew extends React.PureComponent {
   sendPost = (values) => {
-    const { addPost } = this.props;
+    const { addPost, post, editPost } = this.props;
     console.log('FOI');
     console.log('MY valeus', values);
-    addPost(values);
+    if (!post) {
+      return addPost(values);
+    }
+    return editPost(post.id, values);
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories, post } = this.props;
     return (
       <div>
         <Formik
           onSubmit={this.sendPost}
-          initialValues={{ title: '', author: '', body: '' }}
+          initialValues={!post ? { title: '', author: '', body: '' } : { title: post.title, body: post.body }}
         >
           {(props) => {
             const { values, handleSubmit, handleChange, handleBlur, isSubmitting } = props;

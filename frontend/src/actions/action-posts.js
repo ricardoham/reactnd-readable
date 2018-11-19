@@ -15,9 +15,9 @@ export function fetchAllPosts() {
       type: FETCH_ALL_POSTS_SUCCESS,
       payload: response.data,
     }))
-      .catch(response => dispatch({
+      .catch(error => dispatch({
         type: FETCH_ALL_POSTS_FAILURE,
-        error: response.status,
+        error: error.status,
       }))
   );
 }

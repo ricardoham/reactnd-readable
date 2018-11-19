@@ -17,7 +17,7 @@ class PostsDetailsContainer extends Component {
         <div>Loading...</div>
       );
     }
-    console.log('===>MY post container', post);
+    console.log('===>MY post details container', post);
     return (
       <PostsDetails
         post={post}
