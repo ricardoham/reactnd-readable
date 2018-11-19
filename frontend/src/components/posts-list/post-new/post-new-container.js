@@ -7,16 +7,25 @@ import PostNew from './post-new';
 
 class PostNewContainer extends React.PureComponent {
   componentDidMount() {
-    const { id } = this.props.match.params;
+    // const { id } = this.props.match.params;
     this.props.actions.fetchCategories();
-    this.props.actions.fetchPost(id);
+    if (!this.props.post) {
+      return this.fetchData();
+    }
+  }
+
+  fetchData = () => {
+    const {id} = this.props.match.params
+    if (id != null) {
+      this.props.fetchPost(id);
+    }
   }
 
   render() {
     const { categories, post } = this.props;
     if (!categories) {
       return (
-        <div>Loading...</div>
+        <div>Loading...NEW</div>
       );
     }
 
@@ -42,7 +51,7 @@ const mapStateToProps = state => ({
   success: state.posts.success,
   categories: state.categories.categoriesData,
   postAdd: state.posts.postAddData,
-  post: state.post.postData,
+  post: state.posts.postData,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostNewContainer);

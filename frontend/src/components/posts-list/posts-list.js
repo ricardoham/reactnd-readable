@@ -5,7 +5,7 @@ class PostsList extends React.PureComponent {
   renderPosts = () => {
     const { posts } = this.props;
     return posts.map(post => (
-      <li>
+      <li key={post.id}>
         <Link to={`/${post.category}/${post.id}`}>
           {post.title}
         </Link>

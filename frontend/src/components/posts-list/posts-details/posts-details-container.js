@@ -12,15 +12,23 @@ class PostsDetailsContainer extends Component {
 
   render() {
     const { post } = this.props;
+    const { id, category } = this.props.match.params; /*eslint-disable-line*/
+
     if (!post) {
       return (
-        <div>Loading...</div>
+        <div>Loading...Details</div>
       );
     }
     console.log('===>MY post details container', post);
+    console.log('===>MY post ID container', id);
+    console.log('===>MY post ID container', category);
+
+
     return (
       <PostsDetails
+        id={id}
         post={post}
+        category={category}
         removePost={this.props.actions.deletePost}
       />
     );
@@ -28,8 +36,7 @@ class PostsDetailsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  post: state.post.postData,
-  loading: state.loading,
+  post: state.posts.postData,
 });
 
 const mapDispatchToProps = dispatch => ({

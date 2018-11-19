@@ -6,11 +6,13 @@ import {
 
 const INITIAL_STATE = {
   postsData: undefined,
+  postData: undefined,
   postAddData: undefined,
   postEditData: undefined,
   error: undefined,
   loading: true,
   success: false,
+  isDetails: false,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -22,6 +24,7 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         postsData: action.payload,
         loading: false,
+        postData: undefined,
       };
     case FETCH_ALL_POSTS_FAILURE:
       return {
@@ -39,7 +42,7 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         error: action.payload,
-        postData: {},
+        postData: undefined,
         loading: false,
       };
     case FETCH_POST_CATEGORY_SUCCESS:
@@ -66,6 +69,7 @@ export default function (state = INITIAL_STATE, action) {
       };
     case DELETE_POST:
       return _.omit(state, action.payload);
+
     default:
       return state;
   }

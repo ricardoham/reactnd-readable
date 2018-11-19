@@ -20,8 +20,8 @@ class PostsDetails extends React.PureComponent {
   }
 
   render() {
-    const { category } = this.props.match.params;
-    const { post } = this.props
+    // const { category } = this.props.match.params;
+    const { post, category, id } = this.props
     // const { id } = this.props.match.params;
     console.log('DETAILS ID', post.id);
     console.log('DETAILS CATEGORY', post.category);
@@ -29,7 +29,7 @@ class PostsDetails extends React.PureComponent {
     return (
       <div>
         {this.renderPostDetail()}
-        <Link to={`/${category}/${post.id}/post-edit`}>Edit Post</Link>
+        <Link to={`/${post.category}/post-edit/${post.id}`}>Edit Post</Link>
         <Link to="/">Back</Link>
         {/* <button type="button" onClick={this.removePost()}>Remove Post</button> */}
       </div>

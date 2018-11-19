@@ -17,6 +17,8 @@ class PostNew extends React.PureComponent {
 
   render() {
     const { categories, post } = this.props;
+
+    console.log('TEM POST', post);
     return (
       <div>
         <Formik

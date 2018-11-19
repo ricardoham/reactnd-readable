@@ -10,7 +10,7 @@ class PostsListContainer extends Component {
   }
 
   render() {
-    const { posts, loading } = this.props;
+    const { posts } = this.props;
     console.log('posts', posts);
     if (!posts) {
       return (
@@ -25,7 +25,6 @@ class PostsListContainer extends Component {
 
 const mapStateToProps = state => ({
   posts: state.posts.postsData,
-  loading: state.posts.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
