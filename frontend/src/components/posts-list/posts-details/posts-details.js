@@ -15,10 +15,12 @@ class PostsDetails extends React.PureComponent {
     );
   }
 
-  // removePost = () => {
-  //   const { post, removePost } = this.props;
-  //   removePost(post.id);
-  // }
+  removePost = () => {
+    const { singlePost, removePost } = this.props;
+    console.log('POST ID FOR delate', singlePost.id);
+    removePost(singlePost.id);
+    // this.props.history.push('/');
+  }
 
   render() {
     const { singlePost } = this.props;
@@ -29,6 +31,7 @@ class PostsDetails extends React.PureComponent {
       <div>
         {this.renderPostDetail()}
         <br />
+        <button onClick={this.removePost}>RemovePost</button>
         <Link to={`/${singlePost.category}/post-edit/${singlePost.id}`}>Edit Post</Link>
         <Link to="/">Back</Link>
         <Link to={`/${singlePost.category}/${singlePost.id}/comments-new`}>ADD Comment</Link>

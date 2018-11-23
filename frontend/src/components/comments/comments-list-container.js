@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchAllComments } from '../../actions/action-comments';
+import { fetchAllComments, deleteComment } from '../../actions/action-comments';
 import CommentsList from './comments-list';
 
 class CommentsListContainer extends Component {
@@ -21,13 +21,14 @@ class CommentsListContainer extends Component {
         comments={comments}
         postId={postId}
         postCategory={postCategory}
+        removeComment={this.props.actions.deleteComment}
       />
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchAllComments }, dispatch),
+  actions: bindActionCreators({ fetchAllComments, deleteComment }, dispatch),
 });
 
 const mapStateToProps = state => ({

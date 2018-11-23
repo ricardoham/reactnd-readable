@@ -15,6 +15,7 @@ class PostsDetailsContainer extends Component {
   render() {
     const { post } = this.props;
     // const { id, category } = this.props.match.params; /*eslint-disable-line*/
+    console.log('===>MY post details container', post);
 
     if (!post) {
       return (

@@ -4,18 +4,16 @@ import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
-class CommentsNew extends React.PureComponent {
+class CommentsForm extends React.PureComponent {
   sendComment = (values) => {
-    const { comment, addComments, editPost, parentId } = this.props;
+    const { comment, addComments, editComment, parentId } = this.props;
     console.log('FOI');
     console.log('MY valeus', values);
     console.log('Parent ID', parentId);
     if (!comment) {
       return addComments(values, parentId);
     }
-    return editPost(comment.id, values);
-    // console.log('CommentsNew values', values);
-    // return addComments(values, parentId);
+    return editComment(comment.id, values);
   }
 
   render() {
@@ -70,4 +68,4 @@ class CommentsNew extends React.PureComponent {
   }
 }
 
-export default CommentsNew;
+export default CommentsForm;

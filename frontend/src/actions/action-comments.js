@@ -5,7 +5,7 @@ import {
   FETCH_ALL_COMMENTS_SUCCESS, FETCH_ALL_COMMENTS_FAILURE,
   ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
   EDIT_COMMENT_SUCCESS, EDIT_COMMENT_FAILURE,
-  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE,
+  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE, DELETE_COMMENT_SUCCESS,
 } from './actions-types';
 
 axios.defaults.headers.common['Authorization'] = headers;
@@ -70,5 +70,14 @@ export function editComment(id, values) {
         type: EDIT_COMMENT_FAILURE,
         error: error.status,
       }))
+  );
+}
+
+export function deleteComment(id) {
+  return dispatch => (
+    axios.delete(`${ROOT_URL}/comments/${id}`).then(() => dispatch({
+      type: DELETE_COMMENT_SUCCESS,
+      payload: id,
+    }))
   );
 }

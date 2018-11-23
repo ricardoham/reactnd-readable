@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE, FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
   ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, FETCH_POST_CATEGORY_SUCCESS, EDIT_POST_SUCCESS,
@@ -67,9 +66,14 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         postEditData: action.payload,
       };
-    case DELETE_POST:
-      return _.omit(state, action.payload);
-
+    // case DELETE_POST:
+    // console.log('assssas', state);
+    //   return state.filter(postData => postData.id !== action.payload.id);
+      case  DELETE_POST:
+        return {
+          postsData: state.postsData.filter(post =>
+            post.id !== action.payload.id  
+          )}
     default:
       return state;
   }

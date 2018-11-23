@@ -62,12 +62,11 @@ export function editPost(id, values) {
   );
 }
 
-export function deletePost(id, callback) {
+export function deletePost(id) {
   return dispatch => (
     axios.delete(`${ROOT_URL}/posts/${id}`).then(() => dispatch({
       type: DELETE_POST,
       payload: id,
-      callback,
     }))
   );
 }
