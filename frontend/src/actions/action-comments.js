@@ -1,43 +1,60 @@
 import axios from 'axios';
+import uuidv4 from 'uuid/v4';
 import { ROOT_URL, headers } from '../utils/constants';
-import { FETCH_COMMENTS_SUCCESS, FETCH_COMMENTS_FAILURE, ADD_COMMENT_SUCCESS, ADD_POST_FAILURE, EDIT_COMMENT_SUCCESS, EDIT_COMMENT_FAILURE } from './actions-types';
+import {
+  FETCH_ALL_COMMENTS_SUCCESS, FETCH_ALL_COMMENTS_FAILURE,
+  ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
+  EDIT_COMMENT_SUCCESS, EDIT_COMMENT_FAILURE,
+  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE,
+} from './actions-types';
 
 axios.defaults.headers.common['Authorization'] = headers;
 
-export function fetchCommentsPost(post_id) {
+export function fetchAllComments(postId) {
   return dispatch => (
-    axios.get(`${ROOT_URL}/posts/${post_id}/comments`).then(response => dispatch({
-      type: FETCH_COMMENTS_SUCCESS,
+    axios.get(`${ROOT_URL}/posts/${postId}/comments`).then(response => dispatch({
+      type: FETCH_ALL_COMMENTS_SUCCESS,
       payload: response.data,
     }))
       .catch(error => dispatch({
-        type: FETCH_COMMENTS_FAILURE,
+        type: FETCH_ALL_COMMENTS_FAILURE,
         error: error.status,
       }))
   );
 }
 
-export function fetchComment(post_id) {
+export function fetchComment(id) {
   return dispatch => (
-    axios.get(`${ROOT_URL}/comments/${post_id}`).then(response => dispatch({
-      type: FETCH_COMMENTS_SUCCESS,
+    axios.get(`${ROOT_URL}/comments/${id}`).then(response => dispatch({
+      type: FETCH_SINGLE_COMMENT_SUCCESS,
       payload: response.data,
     }))
       .catch(error => dispatch({
-        type: FETCH_COMMENTS_FAILURE,
+        type: FETCH_SINGLE_COMMENT_FAILURE,
         error: error.status,
       }))
   );
 }
 
-export function addComments(id, values) {
+export function addComments(values, parentId) {
+  const { body, author } = values;
+
+  const data = {
+    id: uuidv4(),
+    parentId,
+    timestamp: Date.now(),
+    body,
+    author,
+  };
+
+  // const newValues = { ...values, id: uuidv4(), timestamp: Date.now() };
   return dispatch => (
-    axios.post(`${ROOT_URL}/comments/${id}`, values).then(response => dispatch({
+    axios.post(`${ROOT_URL}/comments`, data).then(response => dispatch({
       type: ADD_COMMENT_SUCCESS,
       payload: response.data,
     }))
       .catch(error => dispatch({
-        type: ADD_POST_FAILURE,
+        type: ADD_COMMENT_FAILURE,
         payload: error.status,
       }))
   );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAllPosts } from '../../actions/action-posts';
@@ -22,6 +23,14 @@ class PostsListContainer extends Component {
     );
   }
 }
+
+PostsListContainer.propTypes = {
+  posts: PropTypes.array, /*eslint-disable-line*/
+};
+
+PostsListContainer.defaultProps = {
+  posts: undefined,
+};
 
 const mapStateToProps = state => ({
   posts: state.posts.postsData,

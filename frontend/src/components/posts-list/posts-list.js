@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class PostsList extends React.PureComponent {
@@ -22,5 +23,10 @@ class PostsList extends React.PureComponent {
     );
   }
 }
+
+PostsList.propTypes = {
+  posts: PropTypes.array.isRequired, /*eslint-disable-line*/
+};
+
 
 export default PostsList;

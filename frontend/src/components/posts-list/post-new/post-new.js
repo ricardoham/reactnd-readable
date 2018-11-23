@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 
 class PostNew extends React.PureComponent {
   sendPost = (values) => {
@@ -26,7 +26,9 @@ class PostNew extends React.PureComponent {
           initialValues={!post ? { title: '', author: '', body: '' } : { title: post.title, body: post.body }}
         >
           {(props) => {
-            const { values, handleSubmit, handleChange, handleBlur, isSubmitting } = props;
+            const {
+              values, handleSubmit, handleChange, handleBlur, isSubmitting,
+            } = props;
             return (
               <form onSubmit={handleSubmit}>
                 <div className="post-new">
@@ -89,5 +91,17 @@ class PostNew extends React.PureComponent {
     );
   }
 }
+
+PostNew.propTypes = {
+  post: PropTypes.object, /*eslint-disable-line*/
+  categories: PropTypes.array, /*eslint-disable-line*/
+  addPost: PropTypes.func.isRequired,
+  editPost: PropTypes.func.isRequired,
+};
+
+PostNew.defaultProps = {
+  post: undefined,
+  categories: undefined,
+};
 
 export default PostNew;

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchPost, deletePost } from '../../../actions/action-posts';
 import PostsDetails from './posts-details';
+// import CommentsListContainer from '../../comments/comments-list-container';
 
 class PostsDetailsContainer extends Component {
   componentDidMount() {
@@ -12,7 +14,7 @@ class PostsDetailsContainer extends Component {
 
   render() {
     const { post } = this.props;
-    const { id, category } = this.props.match.params; /*eslint-disable-line*/
+    // const { id, category } = this.props.match.params; /*eslint-disable-line*/
 
     if (!post) {
       return (
@@ -20,20 +22,26 @@ class PostsDetailsContainer extends Component {
       );
     }
     console.log('===>MY post details container', post);
-    console.log('===>MY post ID container', id);
-    console.log('===>MY post ID container', category);
 
 
     return (
-      <PostsDetails
-        id={id}
-        post={post}
-        category={category}
-        removePost={this.props.actions.deletePost}
-      />
+      <div>
+        <PostsDetails
+          singlePost={post}
+          removePost={this.props.actions.deletePost} /*eslint-disable-line*/
+        />
+      </div>
     );
   }
 }
+
+PostsDetailsContainer.propTypes = {
+  post: PropTypes.object, /*eslint-disable-line*/
+};
+
+PostsDetailsContainer.defaultProps = {
+  post: undefined,
+};
 
 const mapStateToProps = state => ({
   post: state.posts.postData,
