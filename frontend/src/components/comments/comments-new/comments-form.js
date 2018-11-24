@@ -6,12 +6,12 @@ import * as Yup from 'yup';
 
 class CommentsForm extends React.PureComponent {
   sendComment = (values) => {
-    const { comment, addComments, editComment, parentId } = this.props;
+    const { comment, addComments, editComment, parentId, toggleFormNew } = this.props;
     console.log('FOI');
     console.log('MY valeus', values);
     console.log('Parent ID', parentId);
     if (!comment) {
-      return addComments(values, parentId);
+      return addComments(values, parentId).then(() => toggleFormNew());
     }
     return editComment(comment.id, values);
   }

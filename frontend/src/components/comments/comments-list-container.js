@@ -19,7 +19,7 @@ class CommentsListContainer extends Component {
     return (
       <CommentsList
         comments={comments}
-        postId={postId}
+        parentId={postId}
         postCategory={postCategory}
         removeComment={this.props.actions.deleteComment}
       />

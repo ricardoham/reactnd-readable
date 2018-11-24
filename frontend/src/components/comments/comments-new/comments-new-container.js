@@ -6,12 +6,16 @@ import CommentsForm from './comments-form';
 
 class CommentsNewContainer extends React.PureComponent {
   render() {
-    const { id } = this.props.match.params;
+    const { parentId } = this.props;
+    console.log('Parent ID', parentId);
+
+    console.log('ADD comnnet', this.props.addCommentData);
 
     return (
       <CommentsForm
         addComments={this.props.actions.addComments}
-        parentId={id}
+        parentId={parentId}
+        toggleFormNew={this.props.toggleFormNew}
       />
     );
   }

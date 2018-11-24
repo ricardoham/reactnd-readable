@@ -6,8 +6,9 @@ import CommentsForm from './comments-form';
 
 class CommentsEditContainer extends Component {
   componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.actions.fetchComment(id);
+    // const { id } = this.props.match.params;
+    const { commentId } = this.props;
+    this.props.actions.fetchComment(commentId);
   }
 
   render() {
