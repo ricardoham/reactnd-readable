@@ -1,6 +1,7 @@
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE, FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
   ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, FETCH_POST_CATEGORY_SUCCESS, EDIT_POST_SUCCESS,
+  VOTE_SCORE_POSTS_SUCCESS,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
@@ -8,6 +9,7 @@ const INITIAL_STATE = {
   postData: undefined,
   postAddData: undefined,
   postEditData: undefined,
+  postVoteData: undefined,
   error: undefined,
   loading: true,
   success: false,
@@ -15,7 +17,7 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
-  console.log('MY POST', action);
+  console.log('REDUCER POST LIST:', action);
 
   switch (action.type) {
     case FETCH_ALL_POSTS_SUCCESS:
@@ -47,7 +49,7 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_POST_CATEGORY_SUCCESS:
       return {
         ...state,
-        postsDataCategory: action.payload,
+        postsData: action.payload,
       };
     case ADD_POST_SUCCESS:
       return {
@@ -66,14 +68,16 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         postEditData: action.payload,
       };
-    // case DELETE_POST:
-    // console.log('assssas', state);
-    //   return state.filter(postData => postData.id !== action.payload.id);
-      case  DELETE_POST:
-        return {
-          postsData: state.postsData.filter(post =>
-            post.id !== action.payload.id  
-          )}
+    case DELETE_POST:
+      return {
+        postsData: state.postsData.filter(post => post.id !== action.payload.id),
+      };
+    case VOTE_SCORE_POSTS_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        postsData: action.payload,
+      };
     default:
       return state;
   }

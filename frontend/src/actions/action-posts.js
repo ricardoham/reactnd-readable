@@ -3,11 +3,13 @@ import uuidv4 from 'uuid/v4';
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE,
   FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
-  ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
+  ADD_POST_SUCCESS, ADD_POST_FAILURE,
+  DELETE_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
+  VOTE_SCORE_POSTS_FAILURE, VOTE_SCORE_POSTS_SUCCESS, POST_SORT_BY,
 } from './actions-types';
 import { ROOT_URL, headers } from '../utils/constants';
 
-axios.defaults.headers.common['Authorization'] = headers;
+axios.defaults.headers.common['Authorization'] = headers; /*eslint-disable-line*/
 
 export function fetchAllPosts() {
   return dispatch => (
@@ -68,5 +70,18 @@ export function deletePost(id) {
       type: DELETE_POST,
       payload: id,
     }))
+  );
+}
+
+export function voteScorePosts(id, vote) {
+  return dispatch => (
+    axios.post(`${ROOT_URL}/posts/${id}`, { option: vote }).then(response => dispatch({
+      type: VOTE_SCORE_POSTS_SUCCESS,
+      payload: response.data,
+    }))
+      .catch(response => dispatch({
+        type: VOTE_SCORE_POSTS_FAILURE,
+        error: response.status,
+      }))
   );
 }

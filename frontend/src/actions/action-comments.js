@@ -5,10 +5,11 @@ import {
   FETCH_ALL_COMMENTS_SUCCESS, FETCH_ALL_COMMENTS_FAILURE,
   ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
   EDIT_COMMENT_SUCCESS, EDIT_COMMENT_FAILURE,
-  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE, DELETE_COMMENT_SUCCESS,
+  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE,
+  DELETE_COMMENT_SUCCESS, VOTE_SCORE_COMMENTS_SUCCESS, VOTE_SCORE_COMMENTS_FAILURE,
 } from './actions-types';
 
-axios.defaults.headers.common['Authorization'] = headers;
+axios.defaults.headers.common['Authorization'] = headers; /*eslint-disable-line*/
 
 export function fetchAllComments(postId) {
   return dispatch => (
@@ -79,5 +80,18 @@ export function deleteComment(id) {
       type: DELETE_COMMENT_SUCCESS,
       payload: id,
     }))
+  );
+}
+
+export function voteScoreComments(id, vote) {
+  return dispatch => (
+    axios.post(`${ROOT_URL}/comments/${id}`, { option: vote }).then(response => dispatch({
+      type: VOTE_SCORE_COMMENTS_SUCCESS,
+      payload: response.data,
+    }))
+      .catch(response => dispatch({
+        type: VOTE_SCORE_COMMENTS_FAILURE,
+        error: response.status,
+      }))
   );
 }

@@ -4,14 +4,16 @@ import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
+// .then(() => toggleFormNew());
+
 class CommentsForm extends React.PureComponent {
   sendComment = (values) => {
-    const { comment, addComments, editComment, parentId, toggleFormNew } = this.props;
+    const { comment, addComments, editComment, parentId } = this.props;
     console.log('FOI');
     console.log('MY valeus', values);
     console.log('Parent ID', parentId);
     if (!comment) {
-      return addComments(values, parentId).then(() => toggleFormNew());
+      return addComments(values, parentId);
     }
     return editComment(comment.id, values);
   }

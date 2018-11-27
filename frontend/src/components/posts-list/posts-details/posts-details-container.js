@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPost, deletePost } from '../../../actions/action-posts';
+import { fetchPost, deletePost, voteScorePosts } from '../../../actions/action-posts';
 import PostsDetails from './posts-details';
 // import CommentsListContainer from '../../comments/comments-list-container';
 
@@ -13,16 +13,19 @@ class PostsDetailsContainer extends Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, voteScore } = this.props;
     // const { id, category } = this.props.match.params; /*eslint-disable-line*/
     console.log('===>MY post details container', post);
+    console.log('===>MY post voteScore', voteScore);
 
-    if (!post) {
+
+    if (!post && !voteScore) {
       return (
         <div>Loading...Details</div>
       );
     }
-    console.log('===>MY post details container', post);
+    console.log('===>MY post  After details container', post);
+    console.log('===>MY post After voteScore', voteScore);
 
 
     return (
@@ -30,6 +33,8 @@ class PostsDetailsContainer extends Component {
         <PostsDetails
           singlePost={post}
           removePost={this.props.actions.deletePost} /*eslint-disable-line*/
+          voteScorePosts={this.props.actions.voteScorePosts}
+          voteScore={voteScore}
         />
       </div>
     );
@@ -46,10 +51,11 @@ PostsDetailsContainer.defaultProps = {
 
 const mapStateToProps = state => ({
   post: state.posts.postData,
+  voteScore: state.posts.postVoteData,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchPost, deletePost }, dispatch),
+  actions: bindActionCreators({ fetchPost, deletePost, voteScorePosts }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsDetailsContainer);

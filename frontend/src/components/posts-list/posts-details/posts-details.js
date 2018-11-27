@@ -5,12 +5,21 @@ import CommentsListContainer from '../../comments/comments-list-container';
 
 class PostsDetails extends React.PureComponent {
   renderPostDetail = () => {
-    const { singlePost } = this.props;
+    const { singlePost, voteScorePosts, voteScore } = this.props;
+    console.log('AAAAAAAAAAAA', singlePost);
+    console.log('bbbbbbbbbbbbbb', voteScore);
+
     return (
       <div>
         <span>{singlePost.title}</span>
         <span>{singlePost.author}</span>
         <span>{singlePost.body}</span>
+        <button type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}>UpVote</button>
+        {
+          !voteScore ? <span>{singlePost.voteScore}</span> : <span>{voteScore}</span>
+        }
+        <button type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}>DownVote</button>
+
       </div>
     );
   }
@@ -24,17 +33,18 @@ class PostsDetails extends React.PureComponent {
 
   render() {
     const { singlePost } = this.props;
+    console.log('SinglePost Detail', singlePost);
     console.log('DETAILS ID', singlePost.id);
     console.log('DETAILS CATEGORY', singlePost.category);
     console.log('MY URL', window.location);
+    console.log('Vote', singlePost.voteScore);
     return (
       <div>
         {this.renderPostDetail()}
         <br />
-        <button onClick={this.removePost}>RemovePost</button>
+        <button type="button" onClick={this.removePost}>RemovePost</button>
         <Link to={`/${singlePost.category}/post-edit/${singlePost.id}`}>Edit Post</Link>
         <Link to="/">Back</Link>
-        <Link to={`/${singlePost.category}/${singlePost.id}/comments-new`}>ADD Comment</Link>
 
         <CommentsListContainer postCategory={singlePost.category} postId={singlePost.id} />
       </div>
