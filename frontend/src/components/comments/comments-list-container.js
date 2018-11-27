@@ -19,6 +19,7 @@ class CommentsListContainer extends Component {
 
     return comments.map(comment => (
       <CommentsList
+        key={comment.id}
         comment={comment}
         parentId={postId}
         removeComment={this.props.actions.deleteComment}

@@ -40,17 +40,16 @@ export function fetchComment(id) {
 export function addComments(values, parentId) {
   const { body, author } = values;
 
-  const data = {
+  const newValues = {
+    ...values,
     id: uuidv4(),
-    parentId,
     timestamp: Date.now(),
     body,
     author,
+    parentId,
   };
-
-  // const newValues = { ...values, id: uuidv4(), timestamp: Date.now() };
   return dispatch => (
-    axios.post(`${ROOT_URL}/comments`, data).then(response => dispatch({
+    axios.post(`${ROOT_URL}/comments`, newValues).then(response => dispatch({
       type: ADD_COMMENT_SUCCESS,
       payload: response.data,
     }))
