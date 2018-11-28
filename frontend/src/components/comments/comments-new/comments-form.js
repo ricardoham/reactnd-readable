@@ -8,25 +8,25 @@ import * as Yup from 'yup';
 
 class CommentsForm extends React.PureComponent {
   sendComment = (values) => {
-    const { comment, addComments, editComment, parentId } = this.props;
+    const { comment, addComments, editComment, parentId, fetchAllComments } = this.props;
     console.log('FOI');
     console.log('MY valeus', values);
     console.log('Parent ID', parentId);
     if (!comment) {
-      return addComments(values, parentId);
+      return addComments(values, parentId).then(() => fetchAllComments(parentId));
     }
     return editComment(comment.id, values);
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, author, body } = this.props;
 
     console.log('TEM comment', comment);
     return (
       <div>
         <Formik
           onSubmit={this.sendComment}
-          initialValues={!comment ? { author: '', body: '' } : { author: comment.author, body: comment.body }}
+          initialValues={!comment ? { author: '', body: '' } : { author, body }}
         >
           {(props) => {
             const {
@@ -44,7 +44,7 @@ class CommentsForm extends React.PureComponent {
                     onBlur={handleBlur}
                     value={values.author}
                   />
-                  Post:
+                  Comment:
                   <textarea
                     id="body"
                     name="body"

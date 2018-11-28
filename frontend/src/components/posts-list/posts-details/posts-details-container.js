@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchPost, deletePost, voteScorePosts } from '../../../actions/action-posts';
@@ -13,11 +14,14 @@ class PostsDetailsContainer extends Component {
   }
 
   render() {
-    const { post, voteScore } = this.props;
-    // const { id, category } = this.props.match.params; /*eslint-disable-line*/
+    const { post, voteScore, deletedPost } = this.props;
     console.log('===>MY post details container', post);
     console.log('===>MY post voteScore', voteScore);
 
+
+    if (deletedPost) {
+      return <Redirect to="/" />;
+    }
 
     if (!post && !voteScore) {
       return (
@@ -26,7 +30,6 @@ class PostsDetailsContainer extends Component {
     }
     console.log('===>MY post  After details container', post);
     console.log('===>MY post After voteScore', voteScore);
-
 
     return (
       <div>
@@ -52,6 +55,7 @@ PostsDetailsContainer.defaultProps = {
 const mapStateToProps = state => ({
   post: state.posts.postData,
   voteScore: state.posts.postVoteData,
+  deletedPost: state.posts.deletedPost,
 });
 
 const mapDispatchToProps = dispatch => ({

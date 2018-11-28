@@ -13,11 +13,9 @@ class CommentsListContainer extends Component {
   }
 
   renderComments = () => {
-    const { comments, postId } = this.props;
+    const { postId } = this.props;
 
-    console.log('MEU COMENNET', comments);
-
-    return comments.map(comment => (
+    return this.commentsCache.map(comment => (
       <CommentsList
         key={comment.id}
         comment={comment}
@@ -29,12 +27,25 @@ class CommentsListContainer extends Component {
   }
 
   render() {
-    const { comments, postId } = this.props;
-
+    const { comments, postId, editedComment } = this.props;
+    console.log('Comments container', comments);
 
     if (!comments) {
-      return <div>Loading... Comments</div>;
+      return <div>Loading...</div>;
     }
+
+    if (!this.commentsCache && comments) {
+      this.commentsCache = comments;
+    }
+
+    if (editedComment) {
+      const changedId = this.commentsCache.findIndex(el => el.id === editedComment.id);
+      this.commentsCache[changedId] = editedComment;
+    }
+
+    // if (!this.commentsCache) {
+    //   return <div>Loading... Comments</div>;
+    // }
 
     console.log('Comments Container', comments);
     return (
@@ -43,7 +54,6 @@ class CommentsListContainer extends Component {
           parentId={postId}
         />
         {this.renderComments()}
-
       </div>
     );
   }
@@ -55,6 +65,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   comments: state.comments.allCommentsData,
+  editedComment: state.comments.editedComment,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentsListContainer);

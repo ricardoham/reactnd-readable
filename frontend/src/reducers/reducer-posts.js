@@ -12,8 +12,9 @@ const INITIAL_STATE = {
   postVoteData: undefined,
   error: undefined,
   loading: true,
-  success: false,
+  successPost: false,
   isDetails: false,
+  deletedPost: false,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -26,6 +27,9 @@ export default function (state = INITIAL_STATE, action) {
         postsData: action.payload,
         loading: false,
         postData: undefined,
+        postVoteData: undefined,
+        successPost: false,
+        deletedPost: false,
       };
     case FETCH_ALL_POSTS_FAILURE:
       return {
@@ -54,8 +58,7 @@ export default function (state = INITIAL_STATE, action) {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        success: true,
-        error: undefined,
+        successPost: true,
         postAddData: action.payload,
       };
     case ADD_POST_FAILURE:
@@ -71,12 +74,13 @@ export default function (state = INITIAL_STATE, action) {
     case DELETE_POST:
       return {
         postsData: state.postsData.filter(post => post.id !== action.payload.id),
+        deletedPost: true,
       };
     case VOTE_SCORE_POSTS_SUCCESS:
-      console.log(action.payload);
+      console.log('UUUUU', state);
       return {
         ...state,
-        postsData: action.payload,
+        postVoteData: action.payload.voteScore,
       };
     default:
       return state;

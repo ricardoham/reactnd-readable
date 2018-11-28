@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addComments, fetchComment } from '../../../actions/action-comments';
+import { addComments, fetchComment, fetchAllComments } from '../../../actions/action-comments';
 import CommentsForm from './comments-form';
 
 class CommentsNewContainer extends React.PureComponent {
@@ -16,13 +16,14 @@ class CommentsNewContainer extends React.PureComponent {
         addComments={this.props.actions.addComments}
         parentId={parentId}
         toggleFormNew={this.props.toggleFormNew}
+        fetchAllComments={this.props.actions.fetchAllComments}
       />
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ addComments, fetchComment }, dispatch),
+  actions: bindActionCreators({ addComments, fetchComment, fetchAllComments }, dispatch),
 });
 
 const mapStateToProps = state => ({

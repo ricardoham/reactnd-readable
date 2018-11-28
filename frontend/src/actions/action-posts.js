@@ -5,7 +5,7 @@ import {
   FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
   ADD_POST_SUCCESS, ADD_POST_FAILURE,
   DELETE_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
-  VOTE_SCORE_POSTS_FAILURE, VOTE_SCORE_POSTS_SUCCESS, POST_SORT_BY,
+  VOTE_SCORE_POSTS_FAILURE, VOTE_SCORE_POSTS_SUCCESS,
 } from './actions-types';
 import { ROOT_URL, headers } from '../utils/constants';
 
@@ -17,10 +17,10 @@ export function fetchAllPosts() {
       type: FETCH_ALL_POSTS_SUCCESS,
       payload: response.data,
     }))
-      .catch(error => dispatch({
-        type: FETCH_ALL_POSTS_FAILURE,
-        error: error.status,
-      }))
+      // .catch(error => dispatch({
+      //   type: FETCH_ALL_POSTS_FAILURE,
+      //   error: error.status,
+      // }))
   );
 }
 
@@ -32,7 +32,7 @@ export function fetchPost(id) {
     }))
       .catch(response => dispatch({
         type: FETCH_POST_FAILURE,
-        error: response.status,
+        error: response,
       }))
   );
 }
@@ -64,12 +64,15 @@ export function editPost(id, values) {
   );
 }
 
-export function deletePost(id) {
+export function deletePost(id, callback) {
   return dispatch => (
-    axios.delete(`${ROOT_URL}/posts/${id}`).then(() => dispatch({
-      type: DELETE_POST,
-      payload: id,
-    }))
+    axios.delete(`${ROOT_URL}/posts/${id}`).then(() => {
+      callback();
+      dispatch({
+        type: DELETE_POST,
+        payload: id,
+      });
+    })
   );
 }
 

@@ -32,7 +32,7 @@ export function fetchComment(id) {
     }))
       .catch(error => dispatch({
         type: FETCH_SINGLE_COMMENT_FAILURE,
-        error: error.status,
+        error,
       }))
   );
 }
@@ -75,10 +75,12 @@ export function editComment(id, values) {
 
 export function deleteComment(id) {
   return dispatch => (
-    axios.delete(`${ROOT_URL}/comments/${id}`).then(() => dispatch({
-      type: DELETE_COMMENT_SUCCESS,
-      payload: id,
-    }))
+    axios.delete(`${ROOT_URL}/comments/${id}`).then(() => {
+      dispatch({
+        type: DELETE_COMMENT_SUCCESS,
+        payload: id,
+      });
+    })
   );
 }
 

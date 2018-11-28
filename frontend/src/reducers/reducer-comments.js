@@ -1,7 +1,7 @@
 import {
   FETCH_ALL_COMMENTS_SUCCESS, FETCH_ALL_COMMENTS_FAILURE,
   ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
-  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE, VOTE_SCORE_COMMENTS_SUCCESS,
+  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE, VOTE_SCORE_COMMENTS_SUCCESS, FETCH_ALL_POSTS_SUCCESS,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   commentVoteData: undefined,
   error: undefined,
   loadingComment: true,
+  editedComment: undefined,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -22,6 +23,7 @@ export default function (state = INITIAL_STATE, action) {
         allCommentsData: action.payload,
         singleCommentData: undefined,
         commentVoteData: undefined,
+        editedComment: undefined,
       };
     case FETCH_ALL_COMMENTS_FAILURE:
       return {
@@ -33,6 +35,7 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         singleCommentData: action.payload,
         loadingComment: false,
+        editedComment: undefined,
       };
     case FETCH_SINGLE_COMMENT_FAILURE:
       return {
@@ -54,6 +57,12 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         // allCommentsData: action.payload,
+        editedComment: action.payload,
+      };
+    case FETCH_ALL_POSTS_SUCCESS:
+      return {
+        ...state,
+        allCommentsData: undefined,
       };
     default:
       return state;

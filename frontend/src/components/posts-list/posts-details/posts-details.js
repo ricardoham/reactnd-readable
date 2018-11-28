@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import CommentsListContainer from '../../comments/comments-list-container';
 
 class PostsDetails extends React.PureComponent {
@@ -15,9 +15,7 @@ class PostsDetails extends React.PureComponent {
         <span>{singlePost.author}</span>
         <span>{singlePost.body}</span>
         <button type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}>UpVote</button>
-        {
-          !voteScore ? <span>{singlePost.voteScore}</span> : <span>{voteScore}</span>
-        }
+        <span>{voteScore}</span>
         <button type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}>DownVote</button>
 
       </div>
@@ -27,7 +25,9 @@ class PostsDetails extends React.PureComponent {
   removePost = () => {
     const { singlePost, removePost } = this.props;
     console.log('POST ID FOR delate', singlePost.id);
-    removePost(singlePost.id);
+    removePost(singlePost.id, () => (
+      <Redirect to="/" />
+    ));
     // this.props.history.push('/');
   }
 
@@ -38,6 +38,7 @@ class PostsDetails extends React.PureComponent {
     console.log('DETAILS CATEGORY', singlePost.category);
     console.log('MY URL', window.location);
     console.log('Vote', singlePost.voteScore);
+
     return (
       <div>
         {this.renderPostDetail()}

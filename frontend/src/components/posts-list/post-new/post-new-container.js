@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { addPost, fetchPost, editPost } from '../../../actions/action-posts';
 import { fetchCategories } from '../../../actions/action-categories';
 import PostNew from './post-new';
@@ -23,11 +24,15 @@ class PostNewContainer extends React.PureComponent {
   }
 
   render() {
-    const { categories, post } = this.props;
+    const { categories, post, successPost } = this.props;
     if (!categories) {
       return (
         <div>Loading...NEW</div>
       );
+    }
+
+    if (successPost) {
+      return <Redirect to="/" />;
     }
 
     console.log('asdasdad', this.props.postAdd);
@@ -53,6 +58,7 @@ const mapStateToProps = state => ({
   categories: state.categories.categoriesData,
   postAdd: state.posts.postAddData,
   post: state.posts.postData,
+  successPost: state.posts.successPost,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostNewContainer);

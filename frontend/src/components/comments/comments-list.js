@@ -6,6 +6,12 @@ class CommentsList extends React.PureComponent {
     isEdit: false,
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.comment.voteScore !== this.props.comment.voteScore) {
+      return true;
+    }
+  }
+
   toggleFormEdit = () => {
     this.setState({ isEdit: !this.state.isEdit });
   }
@@ -27,7 +33,13 @@ class CommentsList extends React.PureComponent {
         <button type="button" onClick={() => this.props.voteScoreComments(comment.id, 'downVote')}>DownVote</button>
 
         {
-          isEdit ? <CommentsEditContainer commentId={comment.id} />
+          isEdit ? (
+            <CommentsEditContainer
+              commentId={comment.id}
+              author={comment.author}
+              body={comment.body}
+            />
+          )
             : (
               <div>
                 <ul>

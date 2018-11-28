@@ -11,7 +11,7 @@ class CommentsEditContainer extends Component {
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, author, body } = this.props;
     console.log('Edit Comment', comment);
 
     if (!comment) {
@@ -22,6 +22,8 @@ class CommentsEditContainer extends Component {
       <CommentsForm
         comment={comment}
         editComment={this.props.actions.editComment}
+        author={author}
+        body={body}
       />
     );
   }
