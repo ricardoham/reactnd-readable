@@ -24,6 +24,7 @@ class CommentsEditContainer extends Component {
         editComment={this.props.actions.editComment}
         author={author}
         body={body}
+        toggleFormEdit={this.props.toggleFormEdit}
       />
     );
   }

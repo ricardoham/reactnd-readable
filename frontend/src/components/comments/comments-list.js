@@ -17,7 +17,8 @@ class CommentsList extends React.PureComponent {
   }
 
   removeComment = (id) => {
-    this.props.removeComment(id);
+    const { fetchAllComments, parentId } = this.props;
+    this.props.removeComment(id).then(() => fetchAllComments(parentId));
   }
 
   render() {
@@ -38,6 +39,7 @@ class CommentsList extends React.PureComponent {
               commentId={comment.id}
               author={comment.author}
               body={comment.body}
+              toggleFormEdit={this.toggleFormEdit}
             />
           )
             : (

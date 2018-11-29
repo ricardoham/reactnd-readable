@@ -22,6 +22,7 @@ class CommentsListContainer extends Component {
         parentId={postId}
         removeComment={this.props.actions.deleteComment}
         voteScoreComments={this.props.actions.voteScoreComments}
+        fetchAllComments={this.props.actions.fetchAllComments}
       />
     ));
   }
@@ -35,6 +36,10 @@ class CommentsListContainer extends Component {
     }
 
     if (!this.commentsCache && comments) {
+      this.commentsCache = comments;
+    }
+
+    if (this.commentsCache.length !== comments.length) {
       this.commentsCache = comments;
     }
 
