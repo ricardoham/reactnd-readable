@@ -1,7 +1,8 @@
+import _ from 'lodash';
 import {
   FETCH_ALL_COMMENTS_SUCCESS, FETCH_ALL_COMMENTS_FAILURE,
   ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
-  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE, VOTE_SCORE_COMMENTS_SUCCESS, FETCH_ALL_POSTS_SUCCESS,
+  FETCH_SINGLE_COMMENT_SUCCESS, FETCH_SINGLE_COMMENT_FAILURE, VOTE_SCORE_COMMENTS_SUCCESS, FETCH_ALL_POSTS_SUCCESS, EDIT_COMMENT_SUCCESS,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
@@ -52,8 +53,14 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         error: action.payload,
       };
+    case EDIT_COMMENT_SUCCESS:
+    const test = state.allCommentsData.findeIndex()
+    console.log('coments data', state);
+      return {
+        ...state,
+        allCommentsData: [...state.allCommentsData, action.payload],
+      };
     case VOTE_SCORE_COMMENTS_SUCCESS:
-    console.log('aaaasrrrrrrrrrrrrrrrrrrrrr', action.payload);
       return {
         ...state,
         // allCommentsData: action.payload,

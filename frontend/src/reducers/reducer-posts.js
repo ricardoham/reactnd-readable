@@ -60,6 +60,7 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         successPost: true,
         postAddData: action.payload,
+        postsData: action.payload.data,
       };
     case ADD_POST_FAILURE:
       return {
