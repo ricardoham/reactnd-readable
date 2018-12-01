@@ -3,11 +3,13 @@ import uuidv4 from 'uuid/v4';
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE,
   FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
-  ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
+  ADD_POST_SUCCESS, ADD_POST_FAILURE,
+  DELETE_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
+  VOTE_SCORE_POSTS_FAILURE, VOTE_SCORE_POSTS_SUCCESS,
 } from './actions-types';
 import { ROOT_URL, headers } from '../utils/constants';
 
-axios.defaults.headers.common['Authorization'] = headers;
+axios.defaults.headers.common['Authorization'] = headers; /*eslint-disable-line*/
 
 export function fetchAllPosts() {
   return dispatch => (
@@ -15,10 +17,10 @@ export function fetchAllPosts() {
       type: FETCH_ALL_POSTS_SUCCESS,
       payload: response.data,
     }))
-      .catch(response => dispatch({
-        type: FETCH_ALL_POSTS_FAILURE,
-        error: response.status,
-      }))
+      // .catch(error => dispatch({
+      //   type: FETCH_ALL_POSTS_FAILURE,
+      //   error: error.status,
+      // }))
   );
 }
 
@@ -30,7 +32,7 @@ export function fetchPost(id) {
     }))
       .catch(response => dispatch({
         type: FETCH_POST_FAILURE,
-        error: response.status,
+        error: response,
       }))
   );
 }
@@ -64,10 +66,25 @@ export function editPost(id, values) {
 
 export function deletePost(id, callback) {
   return dispatch => (
-    axios.delete(`${ROOT_URL}/posts/${id}`).then(() => dispatch({
-      type: DELETE_POST,
-      payload: id,
-      callback,
+    axios.delete(`${ROOT_URL}/posts/${id}`).then(() => {
+      callback();
+      dispatch({
+        type: DELETE_POST,
+        payload: id,
+      });
+    })
+  );
+}
+
+export function voteScorePosts(id, vote) {
+  return dispatch => (
+    axios.post(`${ROOT_URL}/posts/${id}`, { option: vote }).then(response => dispatch({
+      type: VOTE_SCORE_POSTS_SUCCESS,
+      payload: response.data,
     }))
+      .catch(response => dispatch({
+        type: VOTE_SCORE_POSTS_FAILURE,
+        error: response.status,
+      }))
   );
 }

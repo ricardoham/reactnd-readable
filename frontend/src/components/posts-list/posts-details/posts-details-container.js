@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPost, deletePost } from '../../../actions/action-posts';
+import { fetchPost, deletePost, voteScorePosts } from '../../../actions/action-posts';
 import PostsDetails from './posts-details';
+// import CommentsListContainer from '../../comments/comments-list-container';
 
 class PostsDetailsContainer extends Component {
   componentDidMount() {
@@ -11,29 +14,52 @@ class PostsDetailsContainer extends Component {
   }
 
   render() {
-    const { post } = this.props;
-    if (!post) {
+    const { post, voteScore, deletedPost } = this.props;
+    console.log('===>MY post details container', post);
+    console.log('===>MY post voteScore', voteScore);
+
+
+    if (deletedPost) {
+      return <Redirect to="/" />;
+    }
+
+    if (!post && !voteScore) {
       return (
-        <div>Loading...</div>
+        <div>Loading...Details</div>
       );
     }
-    console.log('===>MY post container', post);
+    console.log('===>MY post  After details container', post);
+    console.log('===>MY post After voteScore', voteScore);
+
     return (
-      <PostsDetails
-        post={post}
-        removePost={this.props.actions.deletePost}
-      />
+      <div>
+        <PostsDetails
+          singlePost={post}
+          removePost={this.props.actions.deletePost} /*eslint-disable-line*/
+          voteScorePosts={this.props.actions.voteScorePosts}
+          voteScore={voteScore}
+        />
+      </div>
     );
   }
 }
 
+PostsDetailsContainer.propTypes = {
+  post: PropTypes.object, /*eslint-disable-line*/
+};
+
+PostsDetailsContainer.defaultProps = {
+  post: undefined,
+};
+
 const mapStateToProps = state => ({
-  post: state.post.postData,
-  loading: state.loading,
+  post: state.posts.postData,
+  voteScore: state.posts.postVoteData,
+  deletedPost: state.posts.deletedPost,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchPost, deletePost }, dispatch),
+  actions: bindActionCreators({ fetchPost, deletePost, voteScorePosts }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsDetailsContainer);

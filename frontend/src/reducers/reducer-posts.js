@@ -1,20 +1,24 @@
-import _ from 'lodash';
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE, FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
   ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, FETCH_POST_CATEGORY_SUCCESS, EDIT_POST_SUCCESS,
+  VOTE_SCORE_POSTS_SUCCESS,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
   postsData: undefined,
+  postData: undefined,
   postAddData: undefined,
   postEditData: undefined,
+  postVoteData: undefined,
   error: undefined,
   loading: true,
-  success: false,
+  successPost: false,
+  isDetails: false,
+  deletedPost: false,
 };
 
 export default function (state = INITIAL_STATE, action) {
-  console.log('MY POST', action);
+  console.log('REDUCER POST LIST:', action);
 
   switch (action.type) {
     case FETCH_ALL_POSTS_SUCCESS:
@@ -22,6 +26,10 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         postsData: action.payload,
         loading: false,
+        postData: undefined,
+        postVoteData: undefined,
+        successPost: false,
+        deletedPost: false,
       };
     case FETCH_ALL_POSTS_FAILURE:
       return {
@@ -39,19 +47,18 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         error: action.payload,
-        postData: {},
+        postData: undefined,
         loading: false,
       };
     case FETCH_POST_CATEGORY_SUCCESS:
       return {
         ...state,
-        postsDataCategory: action.payload,
+        postsData: action.payload,
       };
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        success: true,
-        error: undefined,
+        successPost: true,
         postAddData: action.payload,
       };
     case ADD_POST_FAILURE:
@@ -65,7 +72,16 @@ export default function (state = INITIAL_STATE, action) {
         postEditData: action.payload,
       };
     case DELETE_POST:
-      return _.omit(state, action.payload);
+      return {
+        postsData: state.postsData.filter(post => post.id !== action.payload.id),
+        deletedPost: true,
+      };
+    case VOTE_SCORE_POSTS_SUCCESS:
+      console.log('UUUUU', state);
+      return {
+        ...state,
+        postVoteData: action.payload.voteScore,
+      };
     default:
       return state;
   }

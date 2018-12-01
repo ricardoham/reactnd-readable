@@ -1,39 +1,65 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Redirect, Link } from 'react-router-dom';
+import CommentsListContainer from '../../comments/comments-list-container';
 
 class PostsDetails extends React.PureComponent {
-
   renderPostDetail = () => {
-    const { post } = this.props;
+    const { singlePost, voteScorePosts, voteScore } = this.props;
+    console.log('AAAAAAAAAAAA', singlePost);
+    console.log('bbbbbbbbbbbbbb', voteScore);
+
     return (
       <div>
-        <span>{post.title}</span>
-        <span>{post.author}</span>
-        <span>{post.body}</span>
+        <span>{singlePost.title}</span>
+        <span>{singlePost.author}</span>
+        <span>{singlePost.body}</span>
+        <button type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}>UpVote</button>
+        <span>{voteScore}</span>
+        <button type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}>DownVote</button>
+
       </div>
     );
   }
 
   removePost = () => {
-    const { post, removePost } = this.props;
-    removePost(post.id);
+    const { singlePost, removePost } = this.props;
+    console.log('POST ID FOR delate', singlePost.id);
+    removePost(singlePost.id, () => (
+      <Redirect to="/" />
+    ));
+    // this.props.history.push('/');
   }
 
   render() {
-    const { post } = this.props;
-    // const { id } = this.props.match.params;
-    console.log('DETAILS ID', post.id);
-    console.log('DETAILS CATEGORY', post.category);
+    const { singlePost } = this.props;
+    console.log('SinglePost Detail', singlePost);
+    console.log('DETAILS ID', singlePost.id);
+    console.log('DETAILS CATEGORY', singlePost.category);
     console.log('MY URL', window.location);
+    console.log('Vote', singlePost.voteScore);
+
     return (
       <div>
         {this.renderPostDetail()}
-        <Link to={`/${post.category}/post-edit/${post.id}`}>Edit Post</Link>
+        <br />
+        <button type="button" onClick={this.removePost}>RemovePost</button>
+        <Link to={`/${singlePost.category}/post-edit/${singlePost.id}`}>Edit Post</Link>
         <Link to="/">Back</Link>
-        {/* <button type="button" onClick={this.removePost()}>Remove Post</button> */}
+
+        <CommentsListContainer postCategory={singlePost.category} postId={singlePost.id} />
       </div>
     );
   }
 }
+
+PostsDetails.propTypes = {
+  singlePost: PropTypes.object, /*eslint-disable-line*/
+  // removePost: PropTypes.func.isRequired,
+};
+
+PostsDetails.defaultProps = {
+  singlePost: undefined,
+};
 
 export default PostsDetails;

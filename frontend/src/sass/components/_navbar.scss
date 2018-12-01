@@ -1,0 +1,19 @@
+.navbar {
+  max-width: 43%;
+  padding: 1em;
+  background-color: $color-nav-primary;
+  border-radius: 0.2em;
+
+}
+
+.navbar__link {
+  color: $color-white;
+  text-decoration: none;
+  padding: 1em;
+  &:hover {
+    background-color: $color-nav-light;
+  }
+  &--active {
+    background-color: $color-nav-dark;
+  }
+}

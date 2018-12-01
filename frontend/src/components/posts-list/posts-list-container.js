@@ -1,35 +1,57 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAllPosts } from '../../actions/action-posts';
+import {fetchPostCategory} from '../../actions/action-categories';
+import postSortBy from '../../actions/action-posts-sort';
 import PostsList from './posts-list';
 
 class PostsListContainer extends Component {
-  componentDidMount() {
-    this.props.actions.fetchAllPosts(); /*eslint-disable-line*/
-  }
+  // componentDidMount() {
+  //   const { category } = this.props.match.params;
+  //   console.log('Navbar Container', category);
+
+  //   if (!category) {
+  //     return this.props.actions.fetchAllPosts();
+  //   }
+  //   return this.props.actions.fetchPostCategory(category); /*eslint-disable-line*/
+  //   // this.fetchData();
+  // }
 
   render() {
-    const { posts, loading } = this.props;
+    const { posts } = this.props;
     console.log('posts', posts);
-    if (!posts) {
+    if (!posts || posts.length === 0) {
       return (
-        <div>Loading...</div>
+        <div>Not yet posts</div>
       );
     }
     return (
-      <PostsList posts={posts} />
+      <PostsList
+        posts={posts}
+        postSortBy={this.props.actions.postSortBy}
+        sortType={this.props.postsSort}
+      />
     );
   }
 }
 
+PostsListContainer.propTypes = {
+  posts: PropTypes.array, /*eslint-disable-line*/
+};
+
+PostsListContainer.defaultProps = {
+  posts: undefined,
+};
+
 const mapStateToProps = state => ({
   posts: state.posts.postsData,
-  loading: state.posts.loading,
+  postsSort: state.postsSort.sortEvent,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchAllPosts }, dispatch),
+  actions: bindActionCreators({ fetchPostCategory, fetchAllPosts, postSortBy }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);

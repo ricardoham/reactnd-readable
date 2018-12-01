@@ -12,7 +12,7 @@ class PostsCategoriesContainer extends Component {
   render() {
     const { categories } = this.props;
     if (!categories) {
-      return <div>Loding cate </div>
+      return <div>Loding cate </div>;
     }
     return (
       <PostsCategories categories={categories} />
