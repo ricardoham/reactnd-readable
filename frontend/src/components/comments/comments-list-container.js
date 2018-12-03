@@ -13,9 +13,9 @@ class CommentsListContainer extends Component {
   }
 
   renderComments = () => {
-    const { postId } = this.props;
+    const { postId, comments } = this.props;
 
-    return this.commentsCache.map(comment => (
+    return comments.map(comment => (
       <CommentsList
         key={comment.id}
         comment={comment}
@@ -35,18 +35,18 @@ class CommentsListContainer extends Component {
       return <div>Loading...</div>;
     }
 
-    if (!this.commentsCache && comments) {
-      this.commentsCache = comments;
-    }
+    // if (!this.commentsCache && comments) {
+    //   this.commentsCache = comments;
+    // }
 
-    if (this.commentsCache.length !== comments.length) {
-      this.commentsCache = comments;
-    }
+    // if (this.commentsCache.length !== comments.length) {
+    //   this.commentsCache = comments;
+    // }
 
-    if (editedComment) {
-      const changedId = this.commentsCache.findIndex(el => el.id === editedComment.id);
-      this.commentsCache[changedId] = editedComment;
-    }
+    // if (editedComment) {
+    //   const changedId = this.commentsCache.findIndex(el => el.id === editedComment.id);
+    //   this.commentsCache[changedId] = editedComment;
+    // }
 
     // if (!this.commentsCache) {
     //   return <div>Loading... Comments</div>;

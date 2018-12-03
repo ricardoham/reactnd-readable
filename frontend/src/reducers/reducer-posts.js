@@ -56,11 +56,12 @@ export default function (state = INITIAL_STATE, action) {
         postsData: action.payload,
       };
     case ADD_POST_SUCCESS:
+    console.log('ADIIII', action.payload);
       return {
         ...state,
         successPost: true,
         postAddData: action.payload,
-        postsData: action.payload.data,
+        // postsData: { ...postsData, [action.payload] }
       };
     case ADD_POST_FAILURE:
       return {
@@ -78,10 +79,9 @@ export default function (state = INITIAL_STATE, action) {
         deletedPost: true,
       };
     case VOTE_SCORE_POSTS_SUCCESS:
-      console.log('UUUUU', state);
       return {
         ...state,
-        postVoteData: action.payload.voteScore,
+        postData: action.payload,
       };
     default:
       return state;

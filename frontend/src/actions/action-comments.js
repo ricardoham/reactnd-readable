@@ -68,7 +68,7 @@ export function editComment(id, values) {
     }))
       .catch(error => dispatch({
         type: EDIT_COMMENT_FAILURE,
-        error: error.status,
+        error,
       }))
   );
 }

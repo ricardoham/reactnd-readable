@@ -15,7 +15,7 @@ class PostsDetails extends React.PureComponent {
         <span>{singlePost.author}</span>
         <span>{singlePost.body}</span>
         <button type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}>UpVote</button>
-        <span>{voteScore}</span>
+        <span>{singlePost.voteScore}</span>
         <button type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}>DownVote</button>
 
       </div>

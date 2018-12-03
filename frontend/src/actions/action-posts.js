@@ -42,7 +42,7 @@ export function addPost(values) {
   return dispatch => (
     axios.post(`${ROOT_URL}/posts`, newValues).then(response => dispatch({
       type: ADD_POST_SUCCESS,
-      payload: response,
+      payload: response.data,
     }))
       .catch(response => dispatch({
         type: ADD_POST_FAILURE,

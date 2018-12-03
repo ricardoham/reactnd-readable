@@ -55,7 +55,7 @@ class CommentsForm extends React.PureComponent {
                 </div>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  // disabled={isSubmitting}
                 >
                   Submit Post!
                 </button>
