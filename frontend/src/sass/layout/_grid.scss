@@ -1,0 +1,30 @@
+body {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "header" "header" "header"
+    "navbar" "navbar" "navbar"
+    "post" "post" "post"
+    "footer" "footer" "footer";
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto 100vh auto;
+}
+
+.header {
+  grid-area: header;
+  padding: 1em;
+}
+
+.navbar {
+  grid-area: navbar;
+  padding: 1em;
+
+}
+
+.post {
+  grid-area: post;
+}
+
+.footer {
+  grid-area: footer;
+}

@@ -1,0 +1,22 @@
+.footer {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.footer-item {
+  display: block;
+  padding: 0.5em;
+  text-decoration: none;
+  float: left;
+
+  &--date {
+    font-size: 0.8em;
+  }
+
+  &--author {
+   font-weight: bold;
+   font-size: 0.9em
+  }
+}
