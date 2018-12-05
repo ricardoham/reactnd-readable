@@ -9,7 +9,7 @@ import {
   DELETE_COMMENT_SUCCESS, VOTE_SCORE_COMMENTS_SUCCESS, VOTE_SCORE_COMMENTS_FAILURE,
 } from './actions-types';
 
-axios.defaults.headers.common['Authorization'] = headers; /*eslint-disable-line*/
+axios.defaults.headers.common.Authorization = headers;
 
 export function fetchAllComments(postId) {
   return dispatch => (
@@ -92,7 +92,7 @@ export function voteScoreComments(id, vote) {
     }))
       .catch(response => dispatch({
         type: VOTE_SCORE_COMMENTS_FAILURE,
-        error: response.status,
+        error: response,
       }))
   );
 }

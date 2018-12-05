@@ -1,12 +1,9 @@
 import React from 'react';
-import _ from 'lodash';
 
 class PostsCategories extends React.PureComponent {
   renderCategories = () => {
     const { categories } = this.props;
-    console.log('Dentro', categories);
-
-    return _.map(categories, item => (
+    return categories.map(item => (
       <li>{item.name}</li>
     ));
   }

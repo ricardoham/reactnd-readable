@@ -18,7 +18,6 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
-  console.log('Action comments', action);
   switch (action.type) {
     case FETCH_ALL_COMMENTS_SUCCESS:
       return {
@@ -48,7 +47,6 @@ export default function (state = INITIAL_STATE, action) {
     case ADD_COMMENT_SUCCESS:
       return {
         ...state,
-        // addCommentData: action.payload,
         allCommentsData: [...state.allCommentsData, action.payload],
       };
     case ADD_COMMENT_FAILURE:
@@ -57,12 +55,11 @@ export default function (state = INITIAL_STATE, action) {
         error: action.payload,
       };
     case EDIT_COMMENT_SUCCESS:
-      const test = state.allCommentsData.findIndex(c => c.id === action.payload.id);
-      console.log('=-=-=-=-coments data', state.allCommentsData[test], action.payload);
-      console.log('Just test', test);
+      const commentIndex = state.allCommentsData.findIndex(c => c.id === action.payload.id);
+      state.allCommentsData[commentIndex] = action.payload;
       return {
         ...state,
-        allCommentsData: [...state.allCommentsData[test], action.payload],
+        allCommentsData: [...state.allCommentsData],
       };
 
     case EDIT_POST_FAILURE:
@@ -72,10 +69,11 @@ export default function (state = INITIAL_STATE, action) {
         error: action.payload,
       };
     case VOTE_SCORE_COMMENTS_SUCCESS:
+      let index = state.allCommentsData.findIndex(c => c.id === action.payload.id);
+      state.allCommentsData[index] = action.payload;
       return {
         ...state,
-        // allCommentsData: action.payload,
-        editedComment: action.payload,
+        allCommentsData: [...state.allCommentsData],
       };
     case FETCH_ALL_POSTS_SUCCESS:
       return {

@@ -7,7 +7,7 @@ import {
 } from './actions-types';
 import { ROOT_URL, headers } from '../utils/constants';
 
-axios.defaults.headers.common['Authorization'] = headers;
+axios.defaults.headers.common.Authorization = headers;
 
 export function fetchCategories() {
   return dispatch => (

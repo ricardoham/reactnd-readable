@@ -6,13 +6,18 @@ import CommentsForm from './comments-form';
 
 class CommentsEditContainer extends Component {
   componentDidMount() {
-    const { commentId } = this.props;
-    this.props.actions.fetchComment(commentId);
+    const { commentId, actions } = this.props;
+    actions.fetchComment(commentId);
   }
 
   render() {
-    const { comment, author, body } = this.props;
-    console.log('Edit Comment', comment);
+    const {
+      comment,
+      author,
+      body,
+      actions,
+      toggleFormEdit,
+    } = this.props;
 
     if (!comment) {
       return <div>Loading</div>;
@@ -21,10 +26,10 @@ class CommentsEditContainer extends Component {
     return (
       <CommentsForm
         comment={comment}
-        editComment={this.props.actions.editComment}
+        editComment={actions.editComment}
         author={author}
         body={body}
-        toggleFormEdit={this.props.toggleFormEdit}
+        toggleFormEdit={toggleFormEdit}
       />
     );
   }
