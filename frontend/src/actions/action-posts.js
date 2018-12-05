@@ -4,12 +4,12 @@ import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE,
   FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
   ADD_POST_SUCCESS, ADD_POST_FAILURE,
-  DELETE_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
-  VOTE_SCORE_POSTS_FAILURE, VOTE_SCORE_POSTS_SUCCESS,
+  EDIT_POST_SUCCESS, EDIT_POST_FAILURE,
+  VOTE_SCORE_POSTS_FAILURE, VOTE_SCORE_POSTS_SUCCESS, DELETE_POST_SUCCESS, DELETE_POST_FAILURE,
 } from './actions-types';
 import { ROOT_URL, headers } from '../utils/constants';
 
-axios.defaults.headers.common['Authorization'] = headers; /*eslint-disable-line*/
+axios.defaults.headers.common.Authorization = headers;
 
 export function fetchAllPosts() {
   return dispatch => (
@@ -17,10 +17,10 @@ export function fetchAllPosts() {
       type: FETCH_ALL_POSTS_SUCCESS,
       payload: response.data,
     }))
-      // .catch(error => dispatch({
-      //   type: FETCH_ALL_POSTS_FAILURE,
-      //   error: error.status,
-      // }))
+      .catch(error => dispatch({
+        type: FETCH_ALL_POSTS_FAILURE,
+        error,
+      }))
   );
 }
 
@@ -42,7 +42,7 @@ export function addPost(values) {
   return dispatch => (
     axios.post(`${ROOT_URL}/posts`, newValues).then(response => dispatch({
       type: ADD_POST_SUCCESS,
-      payload: response,
+      payload: response.data,
     }))
       .catch(response => dispatch({
         type: ADD_POST_FAILURE,
@@ -69,10 +69,14 @@ export function deletePost(id, callback) {
     axios.delete(`${ROOT_URL}/posts/${id}`).then(() => {
       callback();
       dispatch({
-        type: DELETE_POST,
+        type: DELETE_POST_SUCCESS,
         payload: id,
       });
     })
+      .catch(error => dispatch({
+        type: DELETE_POST_FAILURE,
+        payload: error,
+      }))
   );
 }
 

@@ -8,11 +8,15 @@ class PostsList extends React.PureComponent {
     const { posts } = this.props;
     const postSorted = sortBy(posts, this.props.sortType).reverse();
     return postSorted.map(post => (
-      <li key={post.id}>
-        <Link to={`/${post.category}/${post.id}`}>
-          {post.title}
+      <div key={post.id} className="post">
+        <h3 className="post__title">{post.title}</h3>
+        <span className="post__author">{post.author}</span>
+        <Link className="post__button" to={`/${post.category}/${post.id}`}>
+          <button type="button">More Details...</button>
         </Link>
-      </li>
+        <span className="post__vote">{post.voteScore}</span>
+        <span className="post__date">{post.timestamp}</span>
+      </div>
     ));
   }
 
@@ -23,7 +27,8 @@ class PostsList extends React.PureComponent {
 
   render() {
     return (
-      <div>
+      <div className="posts">
+
         <div>
           Sort By:
           <select
@@ -35,6 +40,7 @@ class PostsList extends React.PureComponent {
           </select>
         </div>
         {this.renderPosts()}
+
         <Link to="/post/new">Add Post</Link>
       </div>
     );

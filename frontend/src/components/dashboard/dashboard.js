@@ -8,36 +8,23 @@ import PostsListContainer from '../posts-list/posts-list-container';
 
 class Dashboard extends Component {
   componentDidMount() {
-    // const { category } = this.props.match.params;
-    // console.log('Navbar Container', category);
-
-    // if (!category) {
-    //   return this.props.actions.fetchAllPosts();
-    // }
-    // return this.props.actions.fetchPostCategory(category); /*eslint-disable-line*/
-    this.fetchData();
+    const { actions } = this.props;
+    actions.fetchAllPosts();
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.match.params !== this.props.match.params) {
-      this.fetchData();
+      const { category } = this.props.match.params;
+      if (category != null) {
+        return this.props.actions.fetchPostCategory(category);
+      }
+      return this.props.actions.fetchAllPosts();
     }
-  }
-
-  fetchData = () => {
-    const {category} = this.props.match.params;
-    console.log('Category dashboar', category);
-    if (category != null) {
-      return this.props.actions.fetchPostCategory(category)
-    } else {
-      return this.props.actions.fetchAllPosts()
-    }
+    return true;
   }
 
   render() {
     const { posts } = this.props;
-    // console.log('posts', posts);
-    console.log('Post by Categoy', posts);
     if (!posts) {
       return (
         <div>Loading...</div>

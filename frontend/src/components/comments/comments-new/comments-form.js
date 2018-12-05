@@ -4,14 +4,16 @@ import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
-// .then(() => toggleFormNew());
-
 class CommentsForm extends React.PureComponent {
   sendComment = (values) => {
-    const { comment, addComments, editComment, parentId, fetchAllComments, toggleFormEdit } = this.props;
-    console.log('FOI');
-    console.log('MY valeus', values);
-    console.log('Parent ID', parentId);
+    const {
+      comment,
+      addComments,
+      editComment,
+      parentId,
+      fetchAllComments,
+      toggleFormEdit,
+    } = this.props;
     if (!comment) {
       return addComments(values, parentId).then(() => fetchAllComments(parentId));
     }
@@ -21,7 +23,6 @@ class CommentsForm extends React.PureComponent {
   render() {
     const { comment, author, body } = this.props;
 
-    console.log('TEM comment', comment);
     return (
       <div>
         <Formik
@@ -55,7 +56,7 @@ class CommentsForm extends React.PureComponent {
                 </div>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  // disabled={isSubmitting}
                 >
                   Submit Post!
                 </button>

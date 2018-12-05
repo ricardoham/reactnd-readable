@@ -6,32 +6,24 @@ class CommentsList extends React.PureComponent {
     isEdit: false,
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.comment.voteScore !== this.props.comment.voteScore) {
-      return true;
-    }
-  }
-
   toggleFormEdit = () => {
-    this.setState({ isEdit: !this.state.isEdit });
+    this.setState({ isEdit: !this.state.isEdit }); /*eslint-disable-line*/
   }
 
   removeComment = (id) => {
-    const { fetchAllComments, parentId } = this.props;
-    this.props.removeComment(id).then(() => fetchAllComments(parentId));
+    const { fetchAllComments, parentId, removeComment } = this.props;
+    removeComment(id).then(() => fetchAllComments(parentId));
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, voteScoreComments } = this.props;
     const { isEdit } = this.state;
 
-    // console.log('Commentlist Author', commentAuthor);
-    // console.log('ISNEW', isNew);
     return (
       <div>
-        <button type="button" onClick={() => this.props.voteScoreComments(comment.id, 'upVote')}>UpVote</button>
+        <button type="button" onClick={() => voteScoreComments(comment.id, 'upVote')}>UpVote</button>
         <span>{comment.voteScore}</span>
-        <button type="button" onClick={() => this.props.voteScoreComments(comment.id, 'downVote')}>DownVote</button>
+        <button type="button" onClick={() => voteScoreComments(comment.id, 'downVote')}>DownVote</button>
 
         {
           isEdit ? (

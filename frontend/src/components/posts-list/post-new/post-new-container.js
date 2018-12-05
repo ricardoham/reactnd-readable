@@ -8,7 +8,6 @@ import PostNew from './post-new';
 
 class PostNewContainer extends React.PureComponent {
   componentDidMount() {
-    // const { id } = this.props.match.params;
     this.props.actions.fetchCategories();
     if (!this.props.post) {
       return this.fetchDataPost();
@@ -17,7 +16,6 @@ class PostNewContainer extends React.PureComponent {
 
   fetchDataPost = () => {
     const {id} = this.props.match.params;
-    console.log('Post ADD id', id);
     if (id != null) {
       this.props.fetchPost(id);
     }

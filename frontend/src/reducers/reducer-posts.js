@@ -1,7 +1,9 @@
 import {
   FETCH_ALL_POSTS_SUCCESS, FETCH_ALL_POSTS_FAILURE, FETCH_POST_SUCCESS, FETCH_POST_FAILURE,
-  ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, FETCH_POST_CATEGORY_SUCCESS, EDIT_POST_SUCCESS,
+  ADD_POST_SUCCESS, ADD_POST_FAILURE, FETCH_POST_CATEGORY_SUCCESS, EDIT_POST_SUCCESS,
   VOTE_SCORE_POSTS_SUCCESS,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
@@ -56,10 +58,12 @@ export default function (state = INITIAL_STATE, action) {
         postsData: action.payload,
       };
     case ADD_POST_SUCCESS:
+    console.log('ADIIII', action.payload);
       return {
         ...state,
         successPost: true,
         postAddData: action.payload,
+        // postsData: { ...postsData, [action.payload] }
       };
     case ADD_POST_FAILURE:
       return {
@@ -71,16 +75,20 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         postEditData: action.payload,
       };
-    case DELETE_POST:
+    case DELETE_POST_SUCCESS:
       return {
         postsData: state.postsData.filter(post => post.id !== action.payload.id),
         deletedPost: true,
       };
-    case VOTE_SCORE_POSTS_SUCCESS:
-      console.log('UUUUU', state);
+    case DELETE_POST_FAILURE:
       return {
         ...state,
-        postVoteData: action.payload.voteScore,
+        error: action.payload,
+      };
+    case VOTE_SCORE_POSTS_SUCCESS:
+      return {
+        ...state,
+        postData: action.payload,
       };
     default:
       return state;

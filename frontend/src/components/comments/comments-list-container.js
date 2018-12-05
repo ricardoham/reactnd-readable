@@ -8,51 +8,32 @@ import CommentsNewContainer from './comments-new/comments-new-container';
 
 class CommentsListContainer extends Component {
   componentDidMount() {
-    const { postId } = this.props;
-    this.props.actions.fetchAllComments(postId);
+    const { postId, actions } = this.props;
+    actions.fetchAllComments(postId);
   }
 
   renderComments = () => {
-    const { postId } = this.props;
+    const { postId, comments, actions } = this.props;
 
-    return this.commentsCache.map(comment => (
+    return comments.map(comment => (
       <CommentsList
         key={comment.id}
         comment={comment}
         parentId={postId}
-        removeComment={this.props.actions.deleteComment}
-        voteScoreComments={this.props.actions.voteScoreComments}
-        fetchAllComments={this.props.actions.fetchAllComments}
+        removeComment={actions.deleteComment}
+        voteScoreComments={actions.voteScoreComments}
+        fetchAllComments={actions.fetchAllComments}
       />
     ));
   }
 
   render() {
-    const { comments, postId, editedComment } = this.props;
-    console.log('Comments container', comments);
+    const { comments, postId } = this.props;
 
     if (!comments) {
       return <div>Loading...</div>;
     }
 
-    if (!this.commentsCache && comments) {
-      this.commentsCache = comments;
-    }
-
-    if (this.commentsCache.length !== comments.length) {
-      this.commentsCache = comments;
-    }
-
-    if (editedComment) {
-      const changedId = this.commentsCache.findIndex(el => el.id === editedComment.id);
-      this.commentsCache[changedId] = editedComment;
-    }
-
-    // if (!this.commentsCache) {
-    //   return <div>Loading... Comments</div>;
-    // }
-
-    console.log('Comments Container', comments);
     return (
       <div>
         <CommentsNewContainer
