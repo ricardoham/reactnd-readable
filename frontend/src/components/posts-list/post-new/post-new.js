@@ -23,7 +23,7 @@ class PostNew extends React.PureComponent {
       <div>
         <Formik
           onSubmit={this.sendPost}
-          initialValues={!post ? { title: '', author: '', body: '' } : { title: post.title, body: post.body }}
+          initialValues={!post ? { title: '', author: '', body: '' } : { title: post.title, body: post.body, author: post.author }}
         >
           {(props) => {
             const {

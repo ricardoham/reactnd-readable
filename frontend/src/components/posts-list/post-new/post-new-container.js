@@ -15,7 +15,7 @@ class PostNewContainer extends React.PureComponent {
   }
 
   fetchDataPost = () => {
-    const {id} = this.props.match.params;
+    const { id } = this.props.match.params;
     if (id != null) {
       this.props.fetchPost(id);
     }

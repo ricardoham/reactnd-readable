@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 class PostsList extends React.PureComponent {
   renderPosts = () => {
-    const { posts } = this.props;
-    const postSorted = sortBy(posts, this.props.sortType).reverse();
+    const { posts, sortType } = this.props;
+    const postSorted = sortBy(posts, sortType).reverse();
     return postSorted.map(post => (
       <div key={post.id} className="post">
         <h3 className="post__title">{post.title}</h3>

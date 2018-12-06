@@ -5,9 +5,7 @@ import CommentsListContainer from '../../comments/comments-list-container';
 
 class PostsDetails extends React.PureComponent {
   renderPostDetail = () => {
-    const { singlePost, voteScorePosts, voteScore } = this.props;
-    console.log('AAAAAAAAAAAA', singlePost);
-    console.log('bbbbbbbbbbbbbb', voteScore);
+    const { singlePost, voteScorePosts } = this.props;
 
     return (
       <div>
@@ -24,20 +22,13 @@ class PostsDetails extends React.PureComponent {
 
   removePost = () => {
     const { singlePost, removePost } = this.props;
-    console.log('POST ID FOR delate', singlePost.id);
     removePost(singlePost.id, () => (
       <Redirect to="/" />
     ));
-    // this.props.history.push('/');
   }
 
   render() {
     const { singlePost } = this.props;
-    console.log('SinglePost Detail', singlePost);
-    console.log('DETAILS ID', singlePost.id);
-    console.log('DETAILS CATEGORY', singlePost.category);
-    console.log('MY URL', window.location);
-    console.log('Vote', singlePost.voteScore);
 
     return (
       <div>
