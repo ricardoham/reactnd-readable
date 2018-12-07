@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
-// import * as Yup from 'yup';
+import * as Yup from 'yup';
 
 class PostNew extends React.PureComponent {
   sendPost = (values) => {
     const { addPost, post, editPost } = this.props;
-    console.log('FOI');
-    console.log('MY valeus', values);
     if (!post) {
       return addPost(values);
     }
@@ -17,31 +15,44 @@ class PostNew extends React.PureComponent {
 
   render() {
     const { categories, post } = this.props;
+    const validationSchema = Yup.object().shape({
+      title: Yup.string()
+        .required('Title is required to Post'),
+      author: Yup.string()
+        .required('Author is required to Post'),
+      body: Yup.string()
+        .required('A message is required to Post'),
+      category: Yup.string()
+        .required('A category is required'),
+    });
 
-    console.log('TEM POST', post);
     return (
       <div>
         <Formik
           onSubmit={this.sendPost}
-          initialValues={!post ? { title: '', author: '', body: '' } : { title: post.title, body: post.body, author: post.author }}
+          initialValues={!post ? { title: '', author: '', body: '' }
+            : { title: post.title, body: post.body, author: post.author }}
+          validationSchema={validationSchema}
         >
           {(props) => {
             const {
-              values, handleSubmit, handleChange, handleBlur, isSubmitting,
+              values, handleSubmit, handleChange, handleBlur, isSubmitting, errors,
             } = props;
             return (
               <form onSubmit={handleSubmit}>
                 <div className="post-new">
-                Title:
+                  <span>Title:</span>
                   <input
                     id="title"
                     name="title"
-                    type="title"
+                    type="text"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.title}
                   />
-                  Author:
+
+                  <div className="form-validation">{errors.title}</div>
+                  <span>Author:</span>
                   <input
                     id="author"
                     name="author"
@@ -50,7 +61,8 @@ class PostNew extends React.PureComponent {
                     onBlur={handleBlur}
                     value={values.author}
                   />
-                  Category:
+                  <div className="form-validation">{errors.author}</div>
+                  <span>Category:</span>
                   <select
                     id="category"
                     name="category"
@@ -66,7 +78,9 @@ class PostNew extends React.PureComponent {
                       ))
                     }
                   </select>
-                  Post:
+                  <div className="form-validation">{errors.category}</div>
+
+                  <span>Post:</span>
                   <textarea
                     id="body"
                     name="body"
@@ -74,14 +88,20 @@ class PostNew extends React.PureComponent {
                     onBlur={handleBlur}
                     value={values.body}
                   />
+                  <div className="form-validation">{errors.body}</div>
                 </div>
                 <button
                   type="submit"
+                  disabled={!values.title || !values.author || !values.body}
+                >
+                  Submit Post!
+                </button>
+                <button
+                  type="button"
                   disabled={isSubmitting}
                 >
-              Submit Post!
+                  Cancel
                 </button>
-                <button type="button" disabled={isSubmitting}>Cancel</button>
               </form>
             );
           }}

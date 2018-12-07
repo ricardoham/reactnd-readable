@@ -22,21 +22,29 @@ class CommentsForm extends React.PureComponent {
 
   render() {
     const { comment, author, body } = this.props;
+    const validationSchema = Yup.object().shape({
+      author: Yup.string()
+        .required('Author is required to Comment'),
+      body: Yup.string()
+        .required('A message is required to Comment'),
+    });
+
 
     return (
       <div>
         <Formik
           onSubmit={this.sendComment}
           initialValues={!comment ? { author: '', body: '' } : { author, body }}
+          validationSchema={validationSchema}
         >
           {(props) => {
             const {
-              values, handleSubmit, handleChange, handleBlur, isSubmitting,
+              values, errors, handleSubmit, handleChange, handleBlur, isSubmitting,
             } = props;
             return (
               <form onSubmit={handleSubmit}>
                 <div className="post-new">
-                  Author:
+                  <span>Author:</span>
                   <input
                     id="author"
                     name="author"
@@ -45,7 +53,9 @@ class CommentsForm extends React.PureComponent {
                     onBlur={handleBlur}
                     value={values.author}
                   />
-                  Comment:
+                  <div className="form-validation">{errors.author}</div>
+
+                  <span>Comment:</span>
                   <textarea
                     id="body"
                     name="body"
@@ -53,10 +63,12 @@ class CommentsForm extends React.PureComponent {
                     onBlur={handleBlur}
                     value={values.body}
                   />
+                  <div className="form-validation">{errors.body}</div>
+
                 </div>
                 <button
                   type="submit"
-                  // disabled={isSubmitting}
+                  disabled={!values.author || !values.body}
                 >
                   Submit Post!
                 </button>
