@@ -1,8 +1,49 @@
 .post-new {
   display: block;
-  max-width: 12.5em;
+  margin-top: 2em;
+  // max-width: 12.5em;
 }
 
-.post-new__labels {
-  
+.post-new input {
+  display: block;
+  width: 18em;
+  height: 1.3em;
+  border-radius: 5px;
+  outline: none;
+  background-color: $color-white;
+  border: 1px solid $color-grey-dark;
+  cursor: text;
+  margin: 0.5em 0.5em 0.5em 0;
+
+}
+
+.post-new span {
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 0.9em
+}
+
+.post-new textarea {
+  display: block;
+  min-height: 10em;
+  min-width: 30em;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+  overflow: auto;
+  margin: 0.5em 0.5em 0.5em 0;
+
+}
+
+.post-new select {
+  outline: none;
+  width: 10em;
+  margin: 0.5em 0.5em 0.5em 0;
+  border-radius: 5px;
+  background-color: $color-white;
+  box-shadow: $color-grey-ligth-1;
+}
+
+form {
+  align-content: center
 }
