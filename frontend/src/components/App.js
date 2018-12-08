@@ -5,7 +5,7 @@ import Header from './template/header/header';
 import Footer from './template/footer/footer';
 
 const App = () => (
-  <div>
+  <div className="container">
     <Header />
     <Navbar />
     <Routes />

@@ -13,6 +13,7 @@ class PostNew extends React.PureComponent {
     return editPost(post.id, values);
   }
 
+
   render() {
     const { categories, post } = this.props;
     const validationSchema = Yup.object().shape({
@@ -36,7 +37,7 @@ class PostNew extends React.PureComponent {
         >
           {(props) => {
             const {
-              values, handleSubmit, handleChange, handleBlur, isSubmitting, errors,
+              values, handleSubmit, handleChange, handleBlur, isSubmitting, errors, handleReset,
             } = props;
             return (
               <form onSubmit={handleSubmit}>
@@ -69,7 +70,7 @@ class PostNew extends React.PureComponent {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   >
-                    <option value="">Chose Category</option>
+                    <option hidden>Chose Category</option>
                     {
                       categories.map(category => (
                         <option key={category.name} value={category.name}>
@@ -101,6 +102,7 @@ class PostNew extends React.PureComponent {
                   type="button"
                   disabled={isSubmitting}
                   className="btn btn--alert"
+                  onClick={handleReset}
 
                 >
                   Cancel

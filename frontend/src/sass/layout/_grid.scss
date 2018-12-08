@@ -1,30 +1,35 @@
-body {
+.container {
   display: grid;
   grid-gap: 1rem;
   grid-template-areas:
-    "header" "header" "header"
-    "navbar" "navbar" "navbar"
-    "post" "post" "post"
-    "footer" "footer" "footer";
+    "header header header"
+    "navbar navbar navbar"
+    ". . sortby"
+    "posts posts posts"
+    "footer footer footer";
   grid-template-columns: auto auto auto;
-  grid-template-rows: auto 100vh auto;
+  grid-template-rows: auto auto auto auto auto;
 }
 
-.header {
+.header-container {
   grid-area: header;
   padding: 1em;
 }
 
-.navbar {
+.navbar-container {
   grid-area: navbar;
   padding: 1em;
 
 }
 
-.post {
-  grid-area: post;
+.posts-container {
+  grid-area: posts;
 }
 
-.footer {
+.footer-container {
   grid-area: footer;
+}
+
+.sortby-container {
+  grid-area: sortby;
 }

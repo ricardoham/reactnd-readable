@@ -7,10 +7,11 @@
   border-radius: 10rem;
   transition: all .2s;
   position: relative;
-  font-size: 1rem;
-  background-color: $color-white;
-  color: $color-black;
+  font-size: 0.8rem;
+  background-color: $color-btn-common-primary;
+  color: $color-white;
   border-color: $color-btn-common-dark;
+  font-weight: bold;
   cursor: pointer;
 
   &:hover {
@@ -25,5 +26,7 @@
 
   &--alert {
     background-color: $color-alert-light;
+    border-color: $color-alert-dark;
+    outline: none;
   }
 }
