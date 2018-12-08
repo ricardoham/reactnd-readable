@@ -93,12 +93,15 @@ class PostNew extends React.PureComponent {
                 <button
                   type="submit"
                   disabled={!values.title || !values.author || !values.body}
+                  className="btn btn--common"
                 >
                   Submit Post!
                 </button>
                 <button
                   type="button"
                   disabled={isSubmitting}
+                  className="btn btn--alert"
+
                 >
                   Cancel
                 </button>

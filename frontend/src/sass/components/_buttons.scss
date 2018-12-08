@@ -1,0 +1,29 @@
+.btn {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.1em 0.7rem;
+  margin: 0.2em 0.4em;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  position: relative;
+  font-size: 1rem;
+  background-color: $color-white;
+  color: $color-black;
+  border-color: $color-btn-common-dark;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.3rem 0.2rem rgba($color-black,.1s);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &--alert {
+    background-color: $color-alert-light;
+  }
+}
