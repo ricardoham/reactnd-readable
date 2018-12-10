@@ -1,12 +1,14 @@
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import Routes from '../routes/routes';
 import Navbar from './template/navbar/navbar';
-import Header from './template/header/header';
 import Footer from './template/footer/footer';
+
+library.add(faCheckSquare);
 
 const App = () => (
   <div className="container">
-    <Header />
     <Navbar />
     <Routes />
     <Footer />

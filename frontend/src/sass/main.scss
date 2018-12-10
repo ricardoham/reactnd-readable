@@ -13,6 +13,7 @@
 @import './pages/post-new';
 @import './pages/post-not-found';
 @import './pages/posts-list';
+@import './pages/post-detail';
 
 // Components
 @import './components/navbar';
@@ -21,6 +22,5 @@
 @import './components//buttons';
 @import './components/sortby';
 @import './components/selectable';
-
 // Layout
 @import './layout/grid';

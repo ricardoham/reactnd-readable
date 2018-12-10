@@ -1,19 +1,12 @@
 .container {
   display: grid;
-  grid-gap: 1rem;
   grid-template-areas:
-    "header"
     "navbar"
     "sortby"
     "posts"
     "footer";
   grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto;
-}
-
-.header-container {
-  grid-area: header;
-  padding: 1em;
+  grid-template-rows: auto auto auto;
 }
 
 .navbar-container {

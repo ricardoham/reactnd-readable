@@ -1,0 +1,44 @@
+.post-detail-container {
+  margin: 1em;
+}
+
+.post-detail {
+  display: grid;
+  grid-template-areas:
+    "detail-title detail-title"
+    "detail-author ddetail-author"
+    "detail-body detail-body"
+    "detail-vote detail-vote";
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  width: 99%;
+  font-size: 1em;
+  background-color: $color-white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding: 0.5em;
+  span {
+    font-weight: bold;
+    font-size: 1.1em;
+    color:$color-black;
+    text-transform: uppercase;
+  }
+
+}
+
+.post-detail__title {
+  grid-area: detail-title;
+}
+
+.post-detail__author {
+  grid-area: detail-author;
+}
+
+.post-detail__body {
+  grid-area: detail-body;
+}
+
+.post-detail__vote {
+  font-size: 0.7em;
+  grid-area: detail-vote;
+}

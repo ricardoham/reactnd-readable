@@ -67,17 +67,17 @@ class CommentsForm extends React.PureComponent {
 
                 </div>
                 <button
+                  className="btn"
                   type="submit"
                   disabled={!values.author || !values.body}
                 >
-                  Submit Post!
+                  Submit Comment!
                 </button>
-                <button type="button" disabled={isSubmitting}>Cancel</button>
+                <button className="btn btn--alert" type="button" disabled={isSubmitting}>Cancel</button>
               </form>
             );
           }}
         </Formik>
-        <Link to="/">Back</Link>
       </div>
     );
   }

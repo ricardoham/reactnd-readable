@@ -27,12 +27,15 @@ class PostNew extends React.PureComponent {
         .required('A category is required'),
     });
 
+    console.log('My post', post);
     return (
       <div>
         <Formik
           onSubmit={this.sendPost}
           initialValues={!post ? { title: '', author: '', body: '' }
-            : { title: post.title, body: post.body, author: post.author }}
+            : {
+              title: post.title, body: post.body, author: post.author, category: post.category,
+            }}
           validationSchema={validationSchema}
         >
           {(props) => {

@@ -35,16 +35,22 @@ class CommentsList extends React.PureComponent {
             />
           )
             : (
-              <div>
+              <div className="post-detail">
                 <ul>
-                  <li>{comment.author}</li>
-                  <li>{comment.body}</li>
+                  <li>
+Author:
+                    {' '}
+                    {comment.author}
+                  </li>
+                  <li>
+Comment:
+                    {' '}
+                    {comment.body}
+                  </li>
                 </ul>
               </div>
             )
         }
-        <button type="button" onClick={this.toggleFormEdit}>Edit Comment</button>
-        <button type="button" onClick={() => this.removeComment(comment.id)}>Remove Comment</button>
 
       </div>
     );

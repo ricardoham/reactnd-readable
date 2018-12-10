@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchPost, deletePost, voteScorePosts } from '../../../actions/action-posts';
 import PostsDetails from './posts-details';
-// import CommentsListContainer from '../../comments/comments-list-container';
 import PostNotFound from './post-not-found';
 
 class PostsDetailsContainer extends Component {
