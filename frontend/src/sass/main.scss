@@ -12,6 +12,7 @@
 // Pages
 @import './pages/post-new';
 @import './pages/post-not-found';
+@import './pages/posts-list';
 
 // Components
 @import './components/navbar';
@@ -19,5 +20,7 @@
 @import './components/post';
 @import './components//buttons';
 @import './components/sortby';
+@import './components/selectable';
+
 // Layout
 @import './layout/grid';

@@ -69,6 +69,7 @@ class PostNew extends React.PureComponent {
                     name="category"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    className="selectable"
                   >
                     <option hidden>Chose Category</option>
                     {

@@ -1,9 +1,9 @@
 .post-not-found {
-  display: grid;
+  display: flex;
+  justify-content: center;
 }
 
 .post-not-found__text {
-  position: absolute;
   color: $color-black-fancy-light;
   font-size: 1.4em;
   font-weight: bold;
@@ -15,5 +15,5 @@
   width: 35rem;
   height: 35rem;
   border-radius: 100%;
-  box-shadow: 6px 6px rgba($color: #000000, $alpha: 0.1);
+  box-shadow: 6px 6px rgba($color: #444444, $alpha: 0.1);
 }
