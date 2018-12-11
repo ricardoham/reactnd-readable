@@ -11,7 +11,10 @@ class PostsList extends React.PureComponent {
     return postSorted.map(post => (
       <div key={post.id} className="post">
         <h3 className="post__title">{post.title}</h3>
+
         <span className="post__author">
+          <i className="far fa-user" />
+          {' '}
           Author:
           {' '}
           {post.author}
@@ -20,11 +23,17 @@ class PostsList extends React.PureComponent {
           <button className="btn" type="button">More Details...</button>
         </Link>
         <span className="post__vote">
-            Votes:
+          <i className="fas fa-vote-yea" />
+          {' '}
+          Votes:
           {' '}
           {post.voteScore}
         </span>
-        <span className="post__date">{moment(post.timestamp).format('ddd, MMM, YYYY')}</span>
+        <span className="post__date">
+          <i className="far fa-clock" />
+          {' '}
+          {moment(post.timestamp).format('ddd, MMM, YYYY')}
+        </span>
       </div>
     ));
   }
@@ -39,10 +48,12 @@ class PostsList extends React.PureComponent {
 
       <div className="posts-list">
         <div className="sortby">
+          <Link to="/post/new">
+            <button type="button" className="btn">Add new Post</button>
+          </Link>
           <span className="sortby__text">
             Sort By:
           </span>
-
           <select
             onChange={this.handleSortPost}
             className="selectable"
@@ -51,17 +62,10 @@ class PostsList extends React.PureComponent {
             <option value="voteScore">Votes</option>
             <option value="timestamp">Date</option>
           </select>
-          <Link to="/post/new">
-            <button type="button" className="btn">Add new Post</button>
-          </Link>
+
 
         </div>
-        <div className="posts-container">
-
-
-          {this.renderPosts()}
-
-        </div>
+        {this.renderPosts()}
       </div>
 
     );

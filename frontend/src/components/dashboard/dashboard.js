@@ -15,12 +15,13 @@ class Dashboard extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.match.params !== this.props.match.params) {
       const { category } = this.props.match.params;
+
       if (category != null) {
-        return this.props.actions.fetchPostCategory(category);
+        this.props.actions.fetchPostCategory(category);
+      } else {
+        this.props.actions.fetchAllPosts();
       }
-      return this.props.actions.fetchAllPosts();
     }
-    return true;
   }
 
   render() {
@@ -46,6 +47,7 @@ Dashboard.defaultProps = {
 
 const mapStateToProps = state => ({
   posts: state.posts.postsData,
+  postCategory: state.posts.isDetails,
 });
 
 const mapDispatchToProps = dispatch => ({

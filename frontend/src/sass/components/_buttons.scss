@@ -1,17 +1,17 @@
 .btn {
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0.1em 0.7rem;
+  padding: 0.6em 0.7rem;
   margin: 0.2em 0.4em;
   display: inline-block;
-  border-radius: 10rem;
+  border-radius: 2px;
   transition: all .2s;
   position: relative;
   font-size: 0.8rem;
   background-color: $color-btn-common-primary;
   color: $color-white;
-  border-color: $color-btn-common-dark;
   font-weight: bold;
+  border: none;
   cursor: pointer;
 
   &:hover {

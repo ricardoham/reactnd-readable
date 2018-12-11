@@ -44,6 +44,7 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         postData: action.payload,
         loading: false,
+        isDetails: true,
       };
     case FETCH_POST_FAILURE:
       return {
@@ -58,7 +59,7 @@ export default function (state = INITIAL_STATE, action) {
         postsData: action.payload,
       };
     case ADD_POST_SUCCESS:
-    console.log('ADIIII', action.payload);
+      console.log('ADIIII', action.payload);
       return {
         ...state,
         successPost: true,
@@ -73,6 +74,7 @@ export default function (state = INITIAL_STATE, action) {
     case EDIT_POST_SUCCESS:
       return {
         ...state,
+        successPost: true,
         postEditData: action.payload,
       };
     case DELETE_POST_SUCCESS:

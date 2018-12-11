@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect, Link } from 'react-router-dom';
 import CommentsListContainer from '../../comments/comments-list-container';
 
@@ -11,20 +10,20 @@ class PostsDetails extends React.PureComponent {
     return (
       <div className="post-detail">
         <div className="post-detail__title">
-          <span>Title: </span>
+          <h4>Title: </h4>
           <p>
             {singlePost.title}
           </p>
         </div>
         <div className="post-detail__author">
-          <span>Autor: </span>
+          <h4>Author: </h4>
           <p>
             {singlePost.author}
 
           </p>
         </div>
         <div className="post-detail__body">
-          <span>Post: </span>
+          <h4>Post: </h4>
           <p>
             {singlePost.body}
 
@@ -32,10 +31,9 @@ class PostsDetails extends React.PureComponent {
         </div>
 
         <div className="post-detail__vote">
-          <FontAwesomeIcon icon="faCheckSquare" />
-          <button type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}>UpVote</button>
+          <button type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}><i className="far fa-thumbs-up" /></button>
           <div>{singlePost.voteScore}</div>
-          <button type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}>DownVote</button>
+          <button type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}><i className="far fa-thumbs-down" /></button>
         </div>
       </div>
     );
@@ -57,6 +55,16 @@ class PostsDetails extends React.PureComponent {
         <br />
         <Link to={`/${singlePost.category}/post-edit/${singlePost.id}`}><button className="btn" type="button">Edit Post</button></Link>
         <button className="btn btn--alert" type="button" onClick={this.removePost}>Remove Post</button>
+        <Link to="/">
+          {' '}
+          <button
+            className="btn"
+            type="button"
+          >
+                  Back
+          </button>
+        </Link>
+        <h4>Comment in the Post:</h4>
         <CommentsListContainer postCategory={singlePost.category} postId={singlePost.id} />
       </div>
     );

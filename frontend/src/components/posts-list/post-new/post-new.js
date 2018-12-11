@@ -74,6 +74,10 @@ class PostNew extends React.PureComponent {
                     onBlur={handleBlur}
                     className="selectable"
                   >
+                    {
+                    !post ? <option hidden>Chose Category</option> : <option hidden defaultValue="selected">{post.category}</option>
+                  }
+
                     <option hidden>Chose Category</option>
                     {
                       categories.map(category => (
@@ -102,20 +106,20 @@ class PostNew extends React.PureComponent {
                 >
                   Submit Post!
                 </button>
-                <button
-                  type="button"
-                  disabled={isSubmitting}
-                  className="btn btn--alert"
-                  onClick={handleReset}
-
-                >
+                <Link to="/">
+                  <button
+                    type="button"
+                    disabled={isSubmitting}
+                    className="btn btn--alert"
+                    onClick={handleReset}
+                  >
                   Cancel
-                </button>
+                  </button>
+                </Link>
               </form>
             );
           }}
         </Formik>
-        <Link to="/">Back</Link>
       </div>
     );
   }

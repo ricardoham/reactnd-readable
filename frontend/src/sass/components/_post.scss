@@ -1,35 +1,35 @@
 .post {
   display: grid;
   grid-template-areas:
-    "post-title post-title"
-    "post-author post-author"
-    "post-button post-button"
-    "post-vote post-footer";
-  grid-template-columns: auto auto;
-  grid-template-rows: 14vh 3em 5em 2em;
-  width: 32%;
+    "post-date"
+    "post-title"
+    "post-author"
+    "post-button"
+    "post-vote";
+  grid-template-columns: 22em;
+  grid-template-rows: 1em 8em 2em 2em 2em;
+  width: 22em;
   margin-right: 1em;
   margin-bottom: 4px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   float: left;
   background-color: $color-white;
-  place-self:center;
+  word-wrap: break-word;
+  padding: 0.4em;
 }
 
 .post__title {
   grid-area: post-title;
-  place-self:center;
+  color: $color-black-fancy-light;
 }
 
 .post__author {
-  place-self:center;
   grid-area: post-author;
 }
 
 .post__button {
   grid-area: post-button;
-  place-self:center;
-
+  justify-self: end;
 }
 
 .posts__add {
@@ -41,18 +41,24 @@
   // width: 3em;
   background-color: $color-nav-primary;
   border-radius: 100%;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+  // box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
   z-index: 1000;
   color: $color-white;
   text-align: center;
   padding: 1em 1em;
+  justify-items: end;
+  align-items: end;
+  align-self: end;
+  align-content: end;
+  justify-self: end;
 }
 
 .post__vote {
-  padding-left: 4em;
   grid-area: post-vote;
 }
 
 .post__date {
-  grid-area: post-footer;
+  grid-area: post-date;
+  justify-self: end;
+  font-size: 0.8em;
 }
