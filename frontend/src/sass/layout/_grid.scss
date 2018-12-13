@@ -1,26 +1,14 @@
 .container {
   display: grid;
   grid-template-areas:
-    "navbar"
     "sortby"
-    "posts"
-    "footer";
+    "posts";
   grid-template-columns: auto;
-  grid-template-rows: auto auto auto;
-}
-
-.navbar-container {
-  grid-area: navbar;
-  padding: 1em;
-
+  grid-template-rows: auto;
 }
 
 .posts-container {
   grid-area: posts;
-}
-
-.footer-container {
-  grid-area: footer;
 }
 
 .sortby-container {

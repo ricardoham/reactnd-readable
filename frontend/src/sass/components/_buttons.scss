@@ -30,3 +30,28 @@
     outline: none;
   }
 }
+
+.btn-vote {
+  border: none;
+  background: none;
+  font-size: 1.2em;
+  padding: 0.2em;
+  margin: 0.2em;
+  cursor: pointer;
+  &--up {
+    color: $color-primary-dark;
+  }
+  &--down {
+    color: $color-alert-light
+  }
+}
+
+.comment-list__vote-panel {
+  display: flex;
+  margin-top: 1em;
+}
+
+.comment-list__vote {
+  font-weight: bold;
+  margin-top: 0.6em;
+}

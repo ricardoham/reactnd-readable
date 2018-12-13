@@ -8,33 +8,32 @@ class PostsDetails extends React.PureComponent {
     const { singlePost, voteScorePosts } = this.props;
 
     return (
-      <div className="post-detail">
-        <div className="post-detail__title">
-          <h4>Title: </h4>
-          <p>
+
+      <div className="comment-list__comment">
+        <ul>
+          <li>
+            <div className="comment-list__title">Title</div>
+            {' '}
             {singlePost.title}
-          </p>
-        </div>
-        <div className="post-detail__author">
-          <h4>Author: </h4>
-          <p>
+          </li>
+          <li className="post-detail__author">
+            <div className="comment-list__title">Author</div>
+            {' '}
             {singlePost.author}
 
-          </p>
-        </div>
-        <div className="post-detail__body">
-          <h4>Post: </h4>
-          <p>
-            {singlePost.body}
+          </li>
+          <div className="comment-list__title">Post</div>
 
-          </p>
-        </div>
+          {singlePost.body}
 
-        <div className="post-detail__vote">
-          <button type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}><i className="far fa-thumbs-up" /></button>
-          <div>{singlePost.voteScore}</div>
-          <button type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}><i className="far fa-thumbs-down" /></button>
-        </div>
+          <div className="post-detail__vote">
+            <div className="comment-list__vote-panel">
+              <button className="btn-vote btn-vote--up" type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}><i className="far fa-thumbs-up" /></button>
+              <span className="comment-list__vote">{singlePost.voteScore}</span>
+              <button className="btn-vote btn-vote--down" type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}><i className="far fa-thumbs-down" /></button>
+            </div>
+          </div>
+        </ul>
       </div>
     );
   }

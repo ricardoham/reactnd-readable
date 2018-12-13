@@ -21,10 +21,6 @@ class CommentsList extends React.PureComponent {
 
     return (
       <div>
-        <button type="button" onClick={() => voteScoreComments(comment.id, 'upVote')}>UpVote</button>
-        <span>{comment.voteScore}</span>
-        <button type="button" onClick={() => voteScoreComments(comment.id, 'downVote')}>DownVote</button>
-
         {
           isEdit ? (
             <CommentsEditContainer
@@ -35,18 +31,26 @@ class CommentsList extends React.PureComponent {
             />
           )
             : (
-              <div className="post-detail">
+              <div className="comment-list__comment">
                 <ul>
                   <li>
-Author:
+                    <div className="comment-list__title">Author</div>
                     {' '}
                     {comment.author}
                   </li>
                   <li>
-Comment:
+                    <div className="comment-list__title">Comment</div>
+
                     {' '}
                     {comment.body}
                   </li>
+                  <div className="comment-list__vote-panel">
+                    <button className="btn-vote btn-vote--up" type="button" onClick={() => voteScoreComments(comment.id, 'upVote')}><i className="far fa-thumbs-up" /></button>
+                    <span className="comment-list__vote">{comment.voteScore}</span>
+                    <button className="btn-vote btn-vote--down" type="button" onClick={() => voteScoreComments(comment.id, 'downVote')}><i className="far fa-thumbs-down" /></button>
+                  </div>
+                  <button className="btn" type="button" onClick={this.toggleFormEdit}>Edit Comment</button>
+                  <button className="btn btn--alert" type="button" onClick={() => this.removeComment(comment.id)}>Remove Comment</button>
                 </ul>
               </div>
             )

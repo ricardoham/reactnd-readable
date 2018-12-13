@@ -1,5 +1,9 @@
 body {
   font-family: "Montserrat", sans-serif;
-  margin: 2em;
   background-color: $color-body-primary;
+  padding-top: 1em;
+}
+
+form {
+  padding-bottom: 2em;
 }

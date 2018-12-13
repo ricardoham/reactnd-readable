@@ -8,11 +8,16 @@ import Footer from './template/footer/footer';
 library.add(faCheckSquare);
 
 const App = () => (
-  <div className="container">
+  <div>
     <Navbar />
-    <Routes />
+    <div className="container">
+
+      <Routes />
+
+    </div>
     <Footer />
   </div>
+
 );
 
 export default App;
