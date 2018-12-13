@@ -43,3 +43,13 @@
   font-size: 1em;
   grid-area: detail-vote;
 }
+
+.post-details__createon {
+  display: flex;
+  margin-top: 2em;
+}
+
+.post-details__createon-title {
+  font-weight: bold;
+  padding-right: 0.2em;
+}

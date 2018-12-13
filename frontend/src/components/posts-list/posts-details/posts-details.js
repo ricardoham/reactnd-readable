@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom';
 import CommentsListContainer from '../../comments/comments-list-container';
 
@@ -20,12 +21,17 @@ class PostsDetails extends React.PureComponent {
             <div className="comment-list__title">Author</div>
             {' '}
             {singlePost.author}
-
           </li>
-          <div className="comment-list__title">Post</div>
-
-          {singlePost.body}
-
+          <li>
+            <div className="comment-list__title">Post</div>
+            {singlePost.body}
+          </li>
+          <div className="post-details__createon">
+            <div className="post-details__createon-title">Created on: </div>
+            <i className="far fa-clock" />
+            {' '}
+            {moment(singlePost.timestamp).format('ddd, MMM, YYYY')}
+          </div>
           <div className="post-detail__vote">
             <div className="comment-list__vote-panel">
               <button className="btn-vote btn-vote--up" type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}><i className="far fa-thumbs-up" /></button>
