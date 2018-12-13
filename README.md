@@ -6,6 +6,18 @@ The following project is a blog like, to create post based on categories: React,
 
 You can also create comments, remove, posts, vote and sort by date or votes.
 
+### To initialize
+
+Backend:
+- `cd api-server`
+- `npm install`
+- `node server`
+
+Frontend:
+- `cd frontend`
+- `npm install`
+- `npm start`
+
 ## Start Developing (From Udacity)
 
 To get started developing right away:
