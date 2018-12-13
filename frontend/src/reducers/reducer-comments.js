@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   FETCH_ALL_COMMENTS_SUCCESS, FETCH_ALL_COMMENTS_FAILURE,
   ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
@@ -69,7 +68,7 @@ export default function (state = INITIAL_STATE, action) {
         error: action.payload,
       };
     case VOTE_SCORE_COMMENTS_SUCCESS:
-      let index = state.allCommentsData.findIndex(c => c.id === action.payload.id);
+      const index = state.allCommentsData.findIndex(c => c.id === action.payload.id);
       state.allCommentsData[index] = action.payload;
       return {
         ...state,

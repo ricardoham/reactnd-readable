@@ -27,7 +27,6 @@ class PostNew extends React.PureComponent {
         .required('A category is required'),
     });
 
-    console.log('My post', post);
     return (
       <div>
         <Formik
@@ -126,8 +125,8 @@ class PostNew extends React.PureComponent {
 }
 
 PostNew.propTypes = {
-  post: PropTypes.object, /*eslint-disable-line*/
-  categories: PropTypes.array, /*eslint-disable-line*/
+  post: PropTypes.object,
+  categories: PropTypes.array,
   addPost: PropTypes.func.isRequired,
   editPost: PropTypes.func.isRequired,
 };

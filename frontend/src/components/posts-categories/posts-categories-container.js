@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCategories } from '../../actions/action-categories';
@@ -19,6 +20,15 @@ class PostsCategoriesContainer extends Component {
     );
   }
 }
+
+PostsCategoriesContainer.propTypes = {
+  categories: PropTypes.array,
+};
+
+PostsCategoriesContainer.defaultProps = {
+  categories: undefined,
+};
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ fetchCategories }, dispatch),
 });

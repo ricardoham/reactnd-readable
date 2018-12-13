@@ -71,8 +71,9 @@ class PostsDetails extends React.PureComponent {
 }
 
 PostsDetails.propTypes = {
-  singlePost: PropTypes.object, /*eslint-disable-line*/
-  // removePost: PropTypes.func.isRequired,
+  singlePost: PropTypes.object,
+  removePost: PropTypes.func.isRequired,
+  voteScorePosts: PropTypes.func.isRequired,
 };
 
 PostsDetails.defaultProps = {

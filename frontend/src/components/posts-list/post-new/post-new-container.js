@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
@@ -12,10 +13,12 @@ class PostNewContainer extends React.PureComponent {
     if (!this.props.post) {
       return this.fetchDataPost();
     }
+    return true;
   }
 
+
   fetchDataPost = () => {
-    const { id } = this.props.match.params;
+    const { id } = this.props.match.params; /*eslint-disable-line*/ 
     if (id != null) {
       this.props.fetchPost(id);
     }
@@ -33,7 +36,6 @@ class PostNewContainer extends React.PureComponent {
       return <Redirect to="/" />;
     }
 
-    console.log('asdasdad', this.props.postAdd);
     return (
       <PostNew
         addPost={this.props.actions.addPost} /*eslint-disable-line*/
@@ -44,6 +46,21 @@ class PostNewContainer extends React.PureComponent {
     );
   }
 }
+
+PostNewContainer.propTypes = {
+  actions: PropTypes.object.isRequired,
+  fetchPost: PropTypes.func,
+  post: PropTypes.object,
+  categories: PropTypes.array,
+  successPost: PropTypes.bool,
+};
+
+PostNewContainer.defaultProps = {
+  post: undefined,
+  categories: undefined,
+  successPost: undefined,
+  fetchPost: undefined,
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({

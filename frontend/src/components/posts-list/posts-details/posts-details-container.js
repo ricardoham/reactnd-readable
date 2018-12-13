@@ -14,10 +14,9 @@ class PostsDetailsContainer extends Component {
   }
 
   render() {
-    const { post, voteScore, deletedPost } = this.props;
-    console.log('===>MY post details container', post);
-    console.log('===>MY post voteScore', voteScore);
-
+    const {
+      post, voteScore, deletedPost, actions,
+    } = this.props;
 
     if (deletedPost) {
       return <Redirect to="/" />;
@@ -37,8 +36,8 @@ class PostsDetailsContainer extends Component {
       <div>
         <PostsDetails
           singlePost={post}
-          removePost={this.props.actions.deletePost} /*eslint-disable-line*/
-          voteScorePosts={this.props.actions.voteScorePosts}
+          removePost={actions.deletePost}
+          voteScorePosts={actions.voteScorePosts}
           voteScore={voteScore}
         />
       </div>
@@ -47,11 +46,15 @@ class PostsDetailsContainer extends Component {
 }
 
 PostsDetailsContainer.propTypes = {
-  post: PropTypes.object, /*eslint-disable-line*/
+  post: PropTypes.object,
+  voteScore: PropTypes.object,
+  deletedPost: PropTypes.bool,
 };
 
 PostsDetailsContainer.defaultProps = {
   post: undefined,
+  voteScore: undefined,
+  deletedPost: undefined,
 };
 
 const mapStateToProps = state => ({

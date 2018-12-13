@@ -13,8 +13,8 @@ class Dashboard extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params !== this.props.match.params) {
-      const { category } = this.props.match.params;
+    if (prevProps.match.params !== this.props.match.params) { /*eslint-disable-line*/
+      const { category } = this.props.match.params; /*eslint-disable-line*/
 
       if (category != null) {
         this.props.actions.fetchPostCategory(category);
@@ -38,11 +38,14 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  posts: PropTypes.array, /*eslint-disable-line*/
+  actions: PropTypes.object.isRequired,
+  category: PropTypes.string,
+  posts: PropTypes.array,
 };
 
 Dashboard.defaultProps = {
   posts: undefined,
+  category: undefined,
 };
 
 const mapStateToProps = state => ({

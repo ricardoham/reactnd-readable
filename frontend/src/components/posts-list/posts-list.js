@@ -73,7 +73,9 @@ class PostsList extends React.PureComponent {
 }
 
 PostsList.propTypes = {
-  posts: PropTypes.array.isRequired, /*eslint-disable-line*/
+  posts: PropTypes.array.isRequired,
+  sortType: PropTypes.string.isRequired,
+  postSortBy: PropTypes.func.isRequired,
 };
 
 export default PostsList;
