@@ -13,6 +13,7 @@ class PostNew extends React.PureComponent {
     return editPost(post.id, values);
   }
 
+
   render() {
     const { categories, post } = this.props;
     const validationSchema = Yup.object().shape({
@@ -26,17 +27,20 @@ class PostNew extends React.PureComponent {
         .required('A category is required'),
     });
 
+    console.log('My post', post);
     return (
       <div>
         <Formik
           onSubmit={this.sendPost}
           initialValues={!post ? { title: '', author: '', body: '' }
-            : { title: post.title, body: post.body, author: post.author }}
+            : {
+              title: post.title, body: post.body, author: post.author, category: post.category,
+            }}
           validationSchema={validationSchema}
         >
           {(props) => {
             const {
-              values, handleSubmit, handleChange, handleBlur, isSubmitting, errors,
+              values, handleSubmit, handleChange, handleBlur, isSubmitting, errors, handleReset,
             } = props;
             return (
               <form onSubmit={handleSubmit}>
@@ -68,8 +72,13 @@ class PostNew extends React.PureComponent {
                     name="category"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    className="selectable"
                   >
-                    <option value="">Chose Category</option>
+                    {
+                    !post ? <option hidden>Chose Category</option> : <option hidden defaultValue="selected">{post.category}</option>
+                  }
+
+                    <option hidden>Chose Category</option>
                     {
                       categories.map(category => (
                         <option key={category.name} value={category.name}>
@@ -93,20 +102,24 @@ class PostNew extends React.PureComponent {
                 <button
                   type="submit"
                   disabled={!values.title || !values.author || !values.body}
+                  className="btn btn--common"
                 >
                   Submit Post!
                 </button>
-                <button
-                  type="button"
-                  disabled={isSubmitting}
-                >
+                <Link to="/">
+                  <button
+                    type="button"
+                    disabled={isSubmitting}
+                    className="btn btn--alert"
+                    onClick={handleReset}
+                  >
                   Cancel
-                </button>
+                  </button>
+                </Link>
               </form>
             );
           }}
         </Formik>
-        <Link to="/">Back</Link>
       </div>
     );
   }

@@ -1,0 +1,13 @@
+.sortby {
+  display: flex;
+  justify-content: flex-end;
+  place-items: center;
+
+  &__text {
+    font-size: 1em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0.5em;
+    color: $color-black-fancy;
+    font-weight: bold;
+  }
+}

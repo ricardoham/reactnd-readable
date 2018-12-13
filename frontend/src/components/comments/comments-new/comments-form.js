@@ -21,7 +21,9 @@ class CommentsForm extends React.PureComponent {
   }
 
   render() {
-    const { comment, author, body } = this.props;
+    const {
+      comment, author, body, toggleFormEdit,
+    } = this.props;
     const validationSchema = Yup.object().shape({
       author: Yup.string()
         .required('Author is required to Comment'),
@@ -39,7 +41,7 @@ class CommentsForm extends React.PureComponent {
         >
           {(props) => {
             const {
-              values, errors, handleSubmit, handleChange, handleBlur, isSubmitting,
+              values, errors, handleSubmit, handleChange, handleBlur, isSubmitting, handleReset,
             } = props;
             return (
               <form onSubmit={handleSubmit}>
@@ -67,17 +69,20 @@ class CommentsForm extends React.PureComponent {
 
                 </div>
                 <button
+                  className="btn"
                   type="submit"
                   disabled={!values.author || !values.body}
                 >
-                  Submit Post!
+                  Submit Comment!
                 </button>
-                <button type="button" disabled={isSubmitting}>Cancel</button>
+                {
+                  !comment ? <button onClick={handleReset} className="btn btn--alert" type="button" disabled={isSubmitting}>Cancel</button>
+                    : <button onClick={() => toggleFormEdit()} className="btn btn--alert" type="button" disabled={isSubmitting}>Cancel</button>
+                }
               </form>
             );
           }}
         </Formik>
-        <Link to="/">Back</Link>
       </div>
     );
   }

@@ -1,4 +1,12 @@
 a {
   letter-spacing: 0.1em;
-  font-weight: bold; 
+  font-weight: bold;
+  text-decoration: none;
+  color: $color-white;
+}
+
+h4 {
+  margin-block-start: 1em;
+  margin-block-end: 0;
+  color: $color-black-fancy;
 }

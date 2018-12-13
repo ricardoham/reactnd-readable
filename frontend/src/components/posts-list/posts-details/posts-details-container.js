@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchPost, deletePost, voteScorePosts } from '../../../actions/action-posts';
 import PostsDetails from './posts-details';
-// import CommentsListContainer from '../../comments/comments-list-container';
+import PostNotFound from './post-not-found';
 
 class PostsDetailsContainer extends Component {
   componentDidMount() {
@@ -28,8 +28,10 @@ class PostsDetailsContainer extends Component {
         <div>Loading...Details</div>
       );
     }
-    console.log('===>MY post  After details container', post);
-    console.log('===>MY post After voteScore', voteScore);
+
+    if (Object.keys(post).length === 0) {
+      return <PostNotFound />;
+    }
 
     return (
       <div>

@@ -1,0 +1,24 @@
+.post-not-found {
+display: flex;
+  justify-content: center;
+}
+
+.post-not-found__text {
+  position: absolute;
+  margin-top: 0.3em;
+  color: $color-black-fancy-light;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-transform: uppercase;
+  height: 2em;
+}
+
+.post-not-found__img {
+  margin-top: 3em;
+  display: flex;
+  justify-content: center;
+  width: 25rem;
+  height: 25rem;
+  border-radius: 100%;
+  box-shadow: 6px 6px rgba($color: #444444, $alpha: 0.1);
+}

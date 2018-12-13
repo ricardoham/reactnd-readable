@@ -11,11 +11,17 @@
 
 // Pages
 @import './pages/post-new';
+@import './pages/post-not-found';
+@import './pages/posts-list';
+@import './pages/post-detail';
 
 // Components
 @import './components/navbar';
 @import './components/footer';
 @import './components/post';
-
+@import './components//buttons';
+@import './components/sortby';
+@import './components/selectable';
+@import './components/comments';
 // Layout
-// @import './layout/grid';
+@import './layout/grid';
