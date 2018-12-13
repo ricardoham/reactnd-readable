@@ -23,18 +23,7 @@ export default function (state = INITIAL_STATE, action) {
         categoriesData: undefined,
         error: action.payload.error,
       };
-    // case FETCH_POST_CATEGORY_SUCCESS:
-    //   return {
-    //     ...state,
-    //     postsCategoryData: action.payload,
-    //     loading: false,
-    //   };
-    // case FETCH_POST_CATEGORY_FAILURE:
-    //   return {
-    //     ...state,
-    //     categoriesData: undefined,
-    //     error: action.payload.error,
-    //   };
+
     default:
       return state;
   }
