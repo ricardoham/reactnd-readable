@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAllComments, deleteComment, voteScoreComments } from '../../actions/action-comments';
@@ -44,6 +45,16 @@ class CommentsListContainer extends Component {
     );
   }
 }
+
+CommentsListContainer.propTypes = {
+  postId: PropTypes.string.isRequired,
+  actions: PropTypes.object.isRequired,
+  comments: PropTypes.array,
+};
+
+CommentsListContainer.defaultProps = {
+  comments: undefined,
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ fetchAllComments, deleteComment, voteScoreComments }, dispatch),

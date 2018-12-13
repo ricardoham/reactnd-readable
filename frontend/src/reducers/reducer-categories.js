@@ -1,6 +1,5 @@
 import {
   FETCH_CATEGORIES_SUCCESS, FETCH_CATEGORIES_FAILURE,
-  FETCH_POST_CATEGORY_SUCCESS, FETCH_POST_CATEGORY_FAILURE,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
@@ -11,7 +10,6 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
-  console.log('Action category', action);
   switch (action.type) {
     case FETCH_CATEGORIES_SUCCESS:
       return {

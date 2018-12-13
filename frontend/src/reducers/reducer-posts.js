@@ -20,8 +20,6 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
-  console.log('REDUCER POST LIST:', action);
-
   switch (action.type) {
     case FETCH_ALL_POSTS_SUCCESS:
       return {
@@ -59,12 +57,10 @@ export default function (state = INITIAL_STATE, action) {
         postsData: action.payload,
       };
     case ADD_POST_SUCCESS:
-      console.log('ADIIII', action.payload);
       return {
         ...state,
         successPost: true,
         postAddData: action.payload,
-        // postsData: { ...postsData, [action.payload] }
       };
     case ADD_POST_FAILURE:
       return {

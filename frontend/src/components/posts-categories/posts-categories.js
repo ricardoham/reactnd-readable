@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class PostsCategories extends React.PureComponent {
   renderCategories = () => {
@@ -14,5 +15,13 @@ class PostsCategories extends React.PureComponent {
     );
   }
 }
+
+PostsCategories.propTypes = {
+  categories: PropTypes.array,
+};
+
+PostsCategories.defaultProps = {
+  categories: undefined,
+};
 
 export default PostsCategories;

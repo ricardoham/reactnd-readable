@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchComment, editComment } from '../../../actions/action-comments';
@@ -34,6 +35,19 @@ class CommentsEditContainer extends Component {
     );
   }
 }
+
+CommentsEditContainer.propTypes = {
+  commentId: PropTypes.string.isRequired,
+  actions: PropTypes.object.isRequired,
+  comment: PropTypes.object,
+  author: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  toggleFormEdit: PropTypes.func.isRequired,
+};
+
+CommentsEditContainer.defaultProps = {
+  comment: undefined,
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ fetchComment, editComment }, dispatch),

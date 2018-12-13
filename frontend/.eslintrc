@@ -6,6 +6,8 @@
     "parser": "babel-eslint",
     "rules": {
       "no-param-reassign": 0,
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/forbid-prop-types": "disable",
+      "react/destructuring-assignment": "disable",
     }
 }

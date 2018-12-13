@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CommentsEditContainer from './comments-new/comments-edit-container';
 
 class CommentsList extends React.PureComponent {
@@ -60,5 +61,17 @@ class CommentsList extends React.PureComponent {
     );
   }
 }
+
+CommentsList.propTypes = {
+  fetchAllComments: PropTypes.func.isRequired,
+  parentId: PropTypes.string.isRequired,
+  removeComment: PropTypes.func.isRequired,
+  comment: PropTypes.object,
+  voteScoreComments: PropTypes.func.isRequired,
+};
+
+CommentsList.defaultProps = {
+  comment: undefined,
+};
 
 export default CommentsList;

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
 class CommentsForm extends React.PureComponent {
@@ -87,5 +86,28 @@ class CommentsForm extends React.PureComponent {
     );
   }
 }
+
+CommentsForm.propTypes = {
+  comment: PropTypes.object,
+  addComments: PropTypes.func,
+  editComment: PropTypes.func,
+  parentId: PropTypes.string,
+  fetchAllComments: PropTypes.func,
+  toggleFormEdit: PropTypes.func,
+  author: PropTypes.string,
+  body: PropTypes.string,
+};
+
+CommentsForm.defaultProps = {
+  comment: undefined,
+  editComment: undefined,
+  toggleFormEdit: undefined,
+  author: undefined,
+  body: undefined,
+  addComments: undefined,
+  parentId: undefined,
+  fetchAllComments: undefined,
+
+};
 
 export default CommentsForm;

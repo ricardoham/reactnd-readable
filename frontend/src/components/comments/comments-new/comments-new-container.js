@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addComments, fetchComment, fetchAllComments } from '../../../actions/action-comments';
@@ -17,6 +18,16 @@ class CommentsNewContainer extends React.PureComponent {
     );
   }
 }
+
+CommentsNewContainer.propTypes = {
+  actions: PropTypes.object.isRequired,
+  parentId: PropTypes.string.isRequired,
+  toggleFormNew: PropTypes.func,
+};
+
+CommentsNewContainer.defaultProps = {
+  toggleFormNew: undefined,
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ addComments, fetchComment, fetchAllComments }, dispatch),

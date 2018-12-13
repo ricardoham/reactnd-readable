@@ -10,8 +10,7 @@ import PostsList from './posts-list';
 
 class PostsListContainer extends React.PureComponent {
   render() {
-    const { posts } = this.props;
-    console.log('posts', posts);
+    const { posts, postsSort, actions } = this.props;
     if (!posts || posts.length === 0) {
       return (
         <div>
@@ -25,15 +24,17 @@ class PostsListContainer extends React.PureComponent {
     return (
       <PostsList
         posts={posts}
-        postSortBy={this.props.actions.postSortBy}
-        sortType={this.props.postsSort}
+        postSortBy={actions.postSortBy}
+        sortType={postsSort}
       />
     );
   }
 }
 
 PostsListContainer.propTypes = {
-  posts: PropTypes.array, /*eslint-disable-line*/
+  posts: PropTypes.array,
+  actions: PropTypes.object.isRequired,
+  postsSort: PropTypes.string.isRequired,
 };
 
 PostsListContainer.defaultProps = {
