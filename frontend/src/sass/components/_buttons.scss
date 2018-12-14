@@ -49,6 +49,7 @@
 .comment-list__vote-panel {
   display: flex;
   margin-top: 1em;
+  justify-content: flex-end;
 }
 
 .comment-list__vote {

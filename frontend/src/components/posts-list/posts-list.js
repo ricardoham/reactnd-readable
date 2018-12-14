@@ -23,19 +23,19 @@ class PostsList extends React.PureComponent {
         <Link className="post__button" to={`/${post.category}/${post.id}`}>
           <button className="btn" type="button">More Details...</button>
         </Link>
-        <span className="post__vote">
+        <div className="post__vote">
           <i className="post-icon fas fa-vote-yea" />
           Votes:
           {post.voteScore}
           <i className="post-icon far fa-comments" />
-          Comments Number:
+          Comments Amount:
           {post.commentCount}
           <PostVotes
             postId={post.id}
             postVote={post.voteScore}
             voteScorePosts={voteScorePosts}
           />
-        </span>
+        </div>
         <span className="post__date">
           <i className="far fa-clock" />
           {' '}

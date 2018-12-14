@@ -29,7 +29,7 @@ class PostsDetails extends React.PureComponent {
           </li>
           <div className="post-details__createon">
             <div className="post-details__createon-title">Comments Amount:</div>
-            {singlePost.commentCount}
+            <span className="post-details__value">{singlePost.commentCount}</span>
             <div className="post-details__createon-title">Created on:</div>
             <i className="far fa-clock" />
             {' '}
