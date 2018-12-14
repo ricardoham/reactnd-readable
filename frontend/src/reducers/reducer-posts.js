@@ -4,7 +4,7 @@ import {
   VOTE_SCORE_POSTS_SUCCESS,
   DELETE_POST_SUCCESS,
   DELETE_POST_FAILURE,
-  VOTE_SCORE_COMMENTS_FAILURE,
+  VOTE_SCORE_POSTS_FAILURE,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
@@ -93,7 +93,7 @@ export default function (state = INITIAL_STATE, action) {
         postsData: updatePostVote,
         postData: action.payload,
       };
-    case VOTE_SCORE_COMMENTS_FAILURE:
+    case VOTE_SCORE_POSTS_FAILURE:
       return {
         ...state,
         error: action.payload,
