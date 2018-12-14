@@ -12,8 +12,10 @@ class CommentsList extends React.PureComponent {
   }
 
   removeComment = (id) => {
-    const { fetchAllComments, parentId, removeComment } = this.props;
-    removeComment(id).then(() => fetchAllComments(parentId));
+    const {
+      fetchAllComments, parentId, removeComment, fetchPost,
+    } = this.props;
+    removeComment(id).then(() => fetchAllComments(parentId)).then(() => fetchPost(parentId));
   }
 
   render() {
@@ -64,6 +66,7 @@ class CommentsList extends React.PureComponent {
 
 CommentsList.propTypes = {
   fetchAllComments: PropTypes.func.isRequired,
+  fetchPost: PropTypes.func.isRequired,
   parentId: PropTypes.string.isRequired,
   removeComment: PropTypes.func.isRequired,
   comment: PropTypes.object,

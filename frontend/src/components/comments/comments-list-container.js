@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAllComments, deleteComment, voteScoreComments } from '../../actions/action-comments';
+import { fetchPost } from '../../actions/action-posts';
 import CommentsList from './comments-list';
 import CommentsNewContainer from './comments-new/comments-new-container';
 
@@ -24,6 +25,7 @@ class CommentsListContainer extends Component {
         removeComment={actions.deleteComment}
         voteScoreComments={actions.voteScoreComments}
         fetchAllComments={actions.fetchAllComments}
+        fetchPost={actions.fetchPost}
       />
     ));
   }
@@ -57,7 +59,9 @@ CommentsListContainer.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchAllComments, deleteComment, voteScoreComments }, dispatch),
+  actions: bindActionCreators({
+    fetchAllComments, deleteComment, voteScoreComments, fetchPost,
+  }, dispatch),
 });
 
 const mapStateToProps = state => ({

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { fetchAllPosts } from '../../actions/action-posts';
+import { fetchAllPosts, voteScorePosts } from '../../actions/action-posts';
 import { fetchPostCategory } from '../../actions/action-categories';
 import postSortBy from '../../actions/action-posts-sort';
 import PostsList from './posts-list';
@@ -26,6 +26,7 @@ class PostsListContainer extends React.PureComponent {
         posts={posts}
         postSortBy={actions.postSortBy}
         sortType={postsSort}
+        voteScorePosts={actions.voteScorePosts}
       />
     );
   }
@@ -47,7 +48,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchPostCategory, fetchAllPosts, postSortBy }, dispatch),
+  actions: bindActionCreators({
+    fetchPostCategory, fetchAllPosts, postSortBy, voteScorePosts,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);

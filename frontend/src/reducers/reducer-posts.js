@@ -4,6 +4,7 @@ import {
   VOTE_SCORE_POSTS_SUCCESS,
   DELETE_POST_SUCCESS,
   DELETE_POST_FAILURE,
+  VOTE_SCORE_POSTS_FAILURE,
 } from '../actions/actions-types';
 
 const INITIAL_STATE = {
@@ -84,9 +85,18 @@ export default function (state = INITIAL_STATE, action) {
         error: action.payload,
       };
     case VOTE_SCORE_POSTS_SUCCESS:
+      const index = state.postsData.findIndex(c => c.id === action.payload.id);
+      const updatePostVote = [...state.postsData];
+      updatePostVote[index] = action.payload;
       return {
         ...state,
+        postsData: updatePostVote,
         postData: action.payload,
+      };
+    case VOTE_SCORE_POSTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

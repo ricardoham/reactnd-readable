@@ -47,6 +47,7 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         allCommentsData: [...state.allCommentsData, action.payload],
+        commentCountBla: state.allCommentsData.length,
       };
     case ADD_COMMENT_FAILURE:
       return {
@@ -55,10 +56,11 @@ export default function (state = INITIAL_STATE, action) {
       };
     case EDIT_COMMENT_SUCCESS:
       const commentIndex = state.allCommentsData.findIndex(c => c.id === action.payload.id);
-      state.allCommentsData[commentIndex] = action.payload;
+      const updateComments = [...state.allCommentsData];
+      updateComments[commentIndex] = action.payload;
       return {
         ...state,
-        allCommentsData: [...state.allCommentsData],
+        allCommentsData: updateComments,
       };
 
     case EDIT_POST_FAILURE:
@@ -69,10 +71,11 @@ export default function (state = INITIAL_STATE, action) {
       };
     case VOTE_SCORE_COMMENTS_SUCCESS:
       const index = state.allCommentsData.findIndex(c => c.id === action.payload.id);
-      state.allCommentsData[index] = action.payload;
+      const updateCommentsVote = [...state.allCommentsData];
+      updateCommentsVote[index] = action.payload;
       return {
         ...state,
-        allCommentsData: [...state.allCommentsData],
+        allCommentsData: updateCommentsVote,
       };
     case FETCH_ALL_POSTS_SUCCESS:
       return {

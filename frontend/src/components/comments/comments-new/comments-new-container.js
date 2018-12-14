@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addComments, fetchComment, fetchAllComments } from '../../../actions/action-comments';
+import { fetchPost } from '../../../actions/action-posts';
 import CommentsForm from './comments-form';
 
 class CommentsNewContainer extends React.PureComponent {
@@ -14,6 +15,7 @@ class CommentsNewContainer extends React.PureComponent {
         parentId={parentId}
         toggleFormNew={toggleFormNew}
         fetchAllComments={fetchAllComments}
+        fetchPost={actions.fetchPost}
       />
     );
   }
@@ -30,7 +32,9 @@ CommentsNewContainer.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ addComments, fetchComment, fetchAllComments }, dispatch),
+  actions: bindActionCreators({
+    addComments, fetchComment, fetchAllComments, fetchPost,
+  }, dispatch),
 });
 
 const mapStateToProps = state => ({
