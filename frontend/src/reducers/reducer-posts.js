@@ -21,7 +21,6 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
-  console.log('AAA', action);
   switch (action.type) {
     case FETCH_ALL_POSTS_SUCCESS:
       return {
@@ -86,13 +85,13 @@ export default function (state = INITIAL_STATE, action) {
         error: action.payload,
       };
     case VOTE_SCORE_POSTS_SUCCESS:
-      console.log('VC', action.payload);
       const index = state.postsData.findIndex(c => c.id === action.payload.id);
       const updatePostVote = [...state.postsData];
       updatePostVote[index] = action.payload;
       return {
         ...state,
         postsData: updatePostVote,
+        postData: action.payload,
       };
     case VOTE_SCORE_COMMENTS_FAILURE:
       return {
