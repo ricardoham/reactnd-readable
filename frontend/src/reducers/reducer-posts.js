@@ -86,7 +86,7 @@ export default function (state = INITIAL_STATE, action) {
         error: action.payload,
       };
     case VOTE_SCORE_POSTS_SUCCESS:
-      console.log('VAU TOMAN NOC', action.payload);
+      console.log('VC', action.payload);
       const index = state.postsData.findIndex(c => c.id === action.payload.id);
       const updatePostVote = [...state.postsData];
       updatePostVote[index] = action.payload;
