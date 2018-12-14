@@ -3,10 +3,11 @@ import moment from 'moment';
 import { sortBy } from 'lodash';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PostVotes from './post-votes/post-votes';
 
 class PostsList extends React.PureComponent {
   renderPosts = () => {
-    const { posts, sortType } = this.props;
+    const { posts, sortType, voteScorePosts } = this.props;
     const postSorted = sortBy(posts, sortType).reverse();
     return postSorted.map(post => (
       <div key={post.id} className="post">
@@ -23,11 +24,17 @@ class PostsList extends React.PureComponent {
           <button className="btn" type="button">More Details...</button>
         </Link>
         <span className="post__vote">
-          <i className="fas fa-vote-yea" />
-          {' '}
+          <i className="post-icon fas fa-vote-yea" />
           Votes:
-          {' '}
           {post.voteScore}
+          <i className="post-icon far fa-comments" />
+          Comments Number:
+          {post.commentCount}
+          <PostVotes
+            postId={post.id}
+            postVote={post.voteScore}
+            voteScorePosts={voteScorePosts}
+          />
         </span>
         <span className="post__date">
           <i className="far fa-clock" />
@@ -76,6 +83,7 @@ PostsList.propTypes = {
   posts: PropTypes.array.isRequired,
   sortType: PropTypes.string.isRequired,
   postSortBy: PropTypes.func.isRequired,
+  voteScorePosts: PropTypes.func.isRequired,
 };
 
 export default PostsList;

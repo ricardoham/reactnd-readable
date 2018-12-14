@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom';
 import CommentsListContainer from '../../comments/comments-list-container';
+import PostVotes from '../post-votes/post-votes';
 
 class PostsDetails extends React.PureComponent {
   renderPostDetail = () => {
@@ -27,18 +28,18 @@ class PostsDetails extends React.PureComponent {
             {singlePost.body}
           </li>
           <div className="post-details__createon">
-            <div className="post-details__createon-title">Created on: </div>
+            <div className="post-details__createon-title">Comments Amount:</div>
+            {singlePost.commentCount}
+            <div className="post-details__createon-title">Created on:</div>
             <i className="far fa-clock" />
             {' '}
             {moment(singlePost.timestamp).format('ddd, MMM, YYYY')}
           </div>
-          <div className="post-detail__vote">
-            <div className="comment-list__vote-panel">
-              <button className="btn-vote btn-vote--up" type="button" onClick={() => voteScorePosts(singlePost.id, 'upVote')}><i className="far fa-thumbs-up" /></button>
-              <span className="comment-list__vote">{singlePost.voteScore}</span>
-              <button className="btn-vote btn-vote--down" type="button" onClick={() => voteScorePosts(singlePost.id, 'downVote')}><i className="far fa-thumbs-down" /></button>
-            </div>
-          </div>
+          <PostVotes
+            postId={singlePost.id}
+            postVote={singlePost.voteScore}
+            voteScorePosts={voteScorePosts}
+          />
         </ul>
       </div>
     );

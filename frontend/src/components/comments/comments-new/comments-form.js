@@ -12,9 +12,12 @@ class CommentsForm extends React.PureComponent {
       parentId,
       fetchAllComments,
       toggleFormEdit,
+      fetchPost,
     } = this.props;
     if (!comment) {
-      return addComments(values, parentId).then(() => fetchAllComments(parentId));
+      return addComments(values, parentId)
+        .then(() => fetchAllComments(parentId))
+        .then(() => fetchPost(parentId));
     }
     return editComment(comment.id, values).then(() => toggleFormEdit());
   }
@@ -91,6 +94,7 @@ CommentsForm.propTypes = {
   comment: PropTypes.object,
   addComments: PropTypes.func,
   editComment: PropTypes.func,
+  fetchPost: PropTypes.func,
   parentId: PropTypes.string,
   fetchAllComments: PropTypes.func,
   toggleFormEdit: PropTypes.func,
@@ -102,6 +106,7 @@ CommentsForm.defaultProps = {
   comment: undefined,
   editComment: undefined,
   toggleFormEdit: undefined,
+  fetchPost: undefined,
   author: undefined,
   body: undefined,
   addComments: undefined,
